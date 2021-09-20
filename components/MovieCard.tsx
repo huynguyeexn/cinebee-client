@@ -16,13 +16,13 @@ export const MovieCard = ({ imageUrl, name, release, durations }: Props) => {
 				<Image
 					loader={() => imageUrl}
 					src={imageUrl}
+					alt=""
 					layout="fill"
 					objectFit="cover"
 				/>
 			</div>
 			<div className="movie-summary">
 				<Badge variant="success">C16</Badge>
-
 				<h5>{name}</h5>
 				<p>Khởi chiếu: {release}</p>
 				<p>{durations} phút</p>
