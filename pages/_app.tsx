@@ -4,8 +4,13 @@ import 'slick-carousel/slick/slick.css';
 
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import { MainLayout } from 'layouts';
 
 function MyApp({ Component, pageProps }: AppProps) {
-	return <Component {...pageProps} />;
+	return (
+		<MainLayout>
+			<Component {...pageProps} />
+		</MainLayout>
+	);
 }
 export default MyApp;
