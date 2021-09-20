@@ -1,5 +1,4 @@
 // CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BannerHeader, PageTitle } from 'components';
 import { MovieCard } from 'components/MovieCard';
 import type { NextPage } from 'next';
