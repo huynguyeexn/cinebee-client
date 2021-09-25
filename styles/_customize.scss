@@ -1,5 +1,5 @@
 main {
-	margin-top: 80px;
+	margin-top: 70px;
 	display: block;
 }
 
@@ -69,7 +69,12 @@ main {
 	margin-bottom: 2rem;
 }
 .movie-card .movie-link a {
-	color: #333;
+	color: $white;
+	font-weight: bold;
+}
+
+.movie-summary p {
+	color: $light;
 }
 
 .movie-card .movie-link a:hover {

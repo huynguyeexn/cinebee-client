@@ -1,9 +1,13 @@
 .topnav {
 	text-transform: uppercase;
+	color: #2c2e43;
 }
 
 .navbar-light .navbar-nav .nav-link {
-	color: black;
+	color: #2c2e43;
+	&:hover {
+		color: #595260;
+	}
 }
 
 .navbar-light .navbar-nav .show > .nav-link,

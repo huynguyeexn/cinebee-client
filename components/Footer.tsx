@@ -5,7 +5,7 @@ interface Props {}
 
 export const Footer = (props: Props) => {
 	return (
-		<footer className="py-5 bg-primary text-light">
+		<footer className="py-5 bg-black text-light">
 			<Container>
 				<Row>
 					<Col className="text-center">

@@ -12,9 +12,9 @@ export const TopNav = (props: Props) => {
 		<Navbar
 			collapseOnSelect
 			expand="lg"
-			bg="white"
-			variant="light"
-			className="shadow-sm topnav"
+			bg="dark"
+			variant="dark"
+			className="shadow topnav"
 			fixed="top"
 		>
 			<Container>
