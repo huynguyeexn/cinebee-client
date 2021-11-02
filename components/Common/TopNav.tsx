@@ -52,7 +52,7 @@ export const TopNav = (props: Props) => {
 						</Link>
 						<NavDropdown
 							title={
-								<div className="d-flex justify-content-center align-items-center">
+								<div className="d-flex align-items-center">
 									Góc điện ảnh <RiArrowDownSLine />
 								</div>
 							}
@@ -70,7 +70,7 @@ export const TopNav = (props: Props) => {
 								<div>
 									<NavDropdown
 										title={
-											<div className="d-flex justify-content-center align-items-center">
+											<div className="d-flex align-items-center">
 												<FaRegUser className="mb-0 mr-1" />
 												{profile.username}
 											</div>
@@ -79,14 +79,14 @@ export const TopNav = (props: Props) => {
 										className="text-left"
 									>
 										<Link href="/accounts/profile" passHref>
-											<NavDropdown.Item className="d-flex justify-content-center align-items-center">
+											<NavDropdown.Item className="d-flex align-items-center">
 												<AiOutlineInfo className="mb-0 mr-1" />
 												Tài khoản
 											</NavDropdown.Item>
 										</Link>
 										<NavDropdown.Item
 											onClick={handleLogoutClick}
-											className="d-flex justify-content-center align-items-center"
+											className="d-flex align-items-center"
 										>
 											<FiLogOut className="mb-0 mr-1" />
 											Đăng xuất
@@ -96,7 +96,7 @@ export const TopNav = (props: Props) => {
 							</>
 						) : (
 							<Link href="/accounts/login" passHref>
-								<Nav.Link className="d-flex justify-content-center align-items-center">
+								<Nav.Link className="d-flex align-items-center">
 									<FaRegUser className="mb-0 mr-1" />
 									Đăng nhập
 								</Nav.Link>

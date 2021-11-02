@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { authApi } from 'api-client';
 import { AxiosError } from 'axios';
 import { useAuth } from 'hooks';
 import { NextPageWithLayout } from 'interfaces';
@@ -15,18 +16,27 @@ import * as yup from 'yup';
 type Inputs = {
 	username: string;
 	password: string;
+	passwordRepeat: string;
+	fullname: string;
+	email: string;
 };
 
 const schema = yup
 	.object({
 		username: yup.string().required('Tên tài khoản không được để trống'),
 		password: yup.string().required('Mật khẩu không được để trống'),
+		passwordRepeat: yup.string().oneOf([yup.ref('password'), null], 'Mật khẩu không trùng khớp'),
+		fullname: yup
+			.string()
+			.min(5, 'Họ tên không ít hơn 5 ký tự')
+			.required('Họ và tên không được để trống'),
+		email: yup.string().email('Email không hợp lệ').required('Email không được để trống'),
 	})
 	.required();
 
 const LoginPage: NextPageWithLayout = () => {
 	const router = useRouter();
-	const { profile, login } = useAuth({
+	const { profile } = useAuth({
 		revalidateOnMount: false,
 	});
 
@@ -36,6 +46,7 @@ const LoginPage: NextPageWithLayout = () => {
 		formState: { errors, touchedFields, isSubmitting },
 	} = useForm<Inputs>({
 		resolver: yupResolver(schema),
+		mode: 'onBlur',
 	});
 
 	React.useEffect(() => {
@@ -48,8 +59,13 @@ const LoginPage: NextPageWithLayout = () => {
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		try {
-			const { username, password } = data;
-			await login(username, password);
+			const { username, password, fullname, email } = data;
+			await authApi.register({
+				username: username,
+				password: password,
+				email: email,
+				fullname: fullname,
+			});
 		} catch (error) {
 			const msg = (error as AxiosError).response?.data?.message;
 			const errors = (error as AxiosError).response?.data?.errors;
@@ -79,7 +95,7 @@ const LoginPage: NextPageWithLayout = () => {
 								<Form.Control
 									type="text"
 									placeholder="Username..."
-									{...register('username', { required: true })}
+									{...register('username')}
 									isInvalid={Boolean(touchedFields.username && errors.username)}
 								/>
 								<Form.Control.Feedback type="invalid">
@@ -92,8 +108,8 @@ const LoginPage: NextPageWithLayout = () => {
 								<Form.Label>Mật khẩu</Form.Label>
 								<Form.Control
 									type="password"
-									placeholder="Password..."
-									{...register('password', { required: true })}
+									placeholder="password..."
+									{...register('password')}
 									isInvalid={Boolean(touchedFields.password && errors.password)}
 								/>
 								<Form.Control.Feedback type="invalid">
@@ -101,17 +117,59 @@ const LoginPage: NextPageWithLayout = () => {
 								</Form.Control.Feedback>
 							</Form.Group>
 
-							{/* Button Login */}
-							<Form.Group>
-								<Button variant="primary" type="submit" block disabled={isSubmitting}>
-									{isSubmitting ? 'Đăng nhập...' : 'Đăng nhập'}
-								</Button>
+							{/* Password Confirmation */}
+							<Form.Group controlId="passwordRepeat">
+								<Form.Label>Nhập lại mật khẩu</Form.Label>
+								<Form.Control
+									type="password"
+									placeholder="password..."
+									{...register('passwordRepeat')}
+									isInvalid={Boolean(touchedFields.passwordRepeat && errors.passwordRepeat)}
+								/>
+								<Form.Control.Feedback type="invalid">
+									{errors.passwordRepeat?.message}
+								</Form.Control.Feedback>
+							</Form.Group>
+
+							{/* Email */}
+							<Form.Group controlId="email">
+								<Form.Label>Email</Form.Label>
+								<Form.Control
+									type="text"
+									placeholder="Abc@gmail.com..."
+									{...register('email')}
+									isInvalid={Boolean(touchedFields.email && errors.email)}
+								/>
+								<Form.Control.Feedback type="invalid">
+									{errors.email?.message}
+								</Form.Control.Feedback>
+							</Form.Group>
+
+							{/* Fullname */}
+							<Form.Group controlId="fullname">
+								<Form.Label>Họ và tên</Form.Label>
+								<Form.Control
+									type="text"
+									placeholder="Nguyen Van A..."
+									{...register('fullname')}
+									isInvalid={Boolean(touchedFields.fullname && errors.fullname)}
+								/>
+								<Form.Control.Feedback type="invalid">
+									{errors.fullname?.message}
+								</Form.Control.Feedback>
 							</Form.Group>
 
 							{/* Button Register */}
-							<Link href="/accounts/register" passHref>
+							<Form.Group>
+								<Button variant="primary" type="submit" block disabled={isSubmitting}>
+									{isSubmitting ? 'Đăng ký...' : 'Đăng ký'}
+								</Button>
+							</Form.Group>
+
+							{/* Button Login */}
+							<Link href="/accounts/login" passHref>
 								<Button variant="outline-light" block>
-									Đăng ký
+									Đăng nhập
 								</Button>
 							</Link>
 
