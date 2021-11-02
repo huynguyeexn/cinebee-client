@@ -20,14 +20,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
 
 		const handleLoginResponse: ProxyResCallback = (proxyRes, req, res) => {
 			let body = '';
-
+			const statusCode = proxyRes?.statusCode || 200;
 			proxyRes.on('data', (chunk) => {
 				body += chunk;
 			});
 
 			proxyRes.on('end', () => {
 				try {
-					const { access_token, expires_at, expired } = JSON.parse(body);
+					const { access_token, expired, message, data } = JSON.parse(body);
 
 					const cookies = new Cookies(req, res, { secure: process.env.NODE_ENV !== 'development' });
 					cookies.set('access_token', access_token, {
@@ -35,8 +35,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
 						sameSite: 'lax',
 						maxAge: expired * 1000,
 					});
-					(res as NextApiResponse).status(200).json({
-						message: 'Login successfully!',
+
+					(res as NextApiResponse).status(statusCode).json({
+						message: message,
+						data: data,
 					});
 				} catch (error) {
 					(res as NextApiResponse).status(500).json({ message: 'Something went wrong!' });

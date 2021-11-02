@@ -19,10 +19,10 @@ export function useAuth(options?: Partial<PublicConfiguration>) {
 	const firstLoading = profile === undefined && error === undefined;
 
 	// login
-	async function login() {
+	async function login(username: string, password: string) {
 		await authApi.login({
-			username: 'pstokes',
-			password: 'Abc@12345',
+			username: username,
+			password: password,
 		});
 
 		await mutate();
