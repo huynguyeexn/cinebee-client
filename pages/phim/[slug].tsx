@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Col, Container, Row } from 'react-bootstrap';
 import Image from 'next/image';
-import { MovieCard } from 'components/MovieCard';
+import { MovieCard } from 'components';
 
 const Movie = () => {
 	const router = useRouter();
@@ -11,9 +11,7 @@ const Movie = () => {
 		<section className="movie-detail">
 			<div className="movie-detail--banner">
 				<Image
-					loader={() =>
-						'https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg'
-					}
+					loader={() => 'https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg'}
 					src="https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg"
 					alt=""
 					layout="fill"
