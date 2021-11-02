@@ -1,0 +1,13 @@
+.page-title {
+	margin-bottom: 2rem;
+	border-bottom: 1px solid $primary;
+	cursor: default;
+
+	&--title {
+		font-weight: bold;
+	}
+
+	a {
+		cursor: pointer;
+	}
+}

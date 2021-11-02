@@ -9,9 +9,9 @@ interface Props {
 
 export const PageTitle = ({ title, moreUrl, moreLabel }: Props) => {
 	return (
-		<Row className="mb-4 border-bottom">
+		<Row className="page-title">
 			<Col>
-				<h4>{title}</h4>
+				<h3 className="page-title--title">{title}</h3>
 			</Col>
 			<Col className="text-right">
 				{moreUrl && (
