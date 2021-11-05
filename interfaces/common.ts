@@ -13,3 +13,28 @@ export type NextPageWithLayout = NextPage & {
 export type AppPropsWithLayout = AppProps & {
 	Component: NextPageWithLayout;
 };
+
+export interface UploadFile<T = any> {
+	uid: string;
+	size?: number;
+	name: string;
+	fileName?: string;
+	lastModified?: number;
+	lastModifiedDate?: Date;
+	url?: string;
+	percent?: number;
+	thumbUrl?: string;
+	response?: T;
+	error?: any;
+	linkProps?: any;
+	type?: string;
+	xhr?: T;
+	preview?: string;
+}
+export interface ImageUpload extends UploadFile<any> {
+	id: string | number;
+	file_name: string;
+	type: string;
+	alt: string;
+	folder: string;
+}

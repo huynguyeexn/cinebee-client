@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { authApi } from 'api-client';
 import { AxiosError } from 'axios';
 import { useAuth } from 'hooks';
 import { NextPageWithLayout } from 'interfaces';
@@ -15,18 +16,27 @@ import * as yup from 'yup';
 type Inputs = {
 	username: string;
 	password: string;
+	passwordRepeat: string;
+	fullname: string;
+	email: string;
 };
 
 const schema = yup
 	.object({
 		username: yup.string().required('Tên tài khoản không được để trống'),
 		password: yup.string().required('Mật khẩu không được để trống'),
+		passwordRepeat: yup.string().oneOf([yup.ref('password'), null], 'Mật khẩu không trùng khớp'),
+		fullname: yup
+			.string()
+			.min(5, 'Họ tên không ít hơn 5 ký tự')
+			.required('Họ và tên không được để trống'),
+		email: yup.string().email('Email không hợp lệ').required('Email không được để trống'),
 	})
 	.required();
 
 const LoginPage: NextPageWithLayout = () => {
 	const router = useRouter();
-	const { profile, login } = useAuth({
+	const { profile } = useAuth({
 		revalidateOnMount: false,
 	});
 
@@ -36,6 +46,7 @@ const LoginPage: NextPageWithLayout = () => {
 		formState: { errors, touchedFields, isSubmitting },
 	} = useForm<Inputs>({
 		resolver: yupResolver(schema),
+		mode: 'onBlur',
 	});
 
 	React.useEffect(() => {
@@ -44,12 +55,12 @@ const LoginPage: NextPageWithLayout = () => {
 		}
 	}, [profile, router]);
 
-	const handleGoBackClick = () => router.push('/');
+	const handleGoBackClick = () => router.back();
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		try {
-			const { username, password } = data;
-			await login(username, password);
+			const { username, password, fullname, email } = data;
+			console.log('forgot passowrd');
 		} catch (error) {
 			const msg = (error as AxiosError).response?.data?.message;
 			const errors = (error as AxiosError).response?.data?.errors;
@@ -71,56 +82,28 @@ const LoginPage: NextPageWithLayout = () => {
 				<Card>
 					<Card.Body>
 						<Form onSubmit={handleSubmit(onSubmit)}>
-							<h3 className="text-center mb-4">Đăng nhập</h3>
+							<h3 className="text-center mb-4">Quên mật khẩu</h3>
 
-							{/* Username */}
-							<Form.Group controlId="username">
-								<Form.Label>Tên tài khoản</Form.Label>
+							{/* Email */}
+							<Form.Group controlId="email">
+								<Form.Label>Email đã đăng ký</Form.Label>
 								<Form.Control
 									type="text"
-									placeholder="Username..."
-									{...register('username', { required: true })}
-									isInvalid={Boolean(touchedFields.username && errors.username)}
+									placeholder="Abc@gmail.com..."
+									{...register('email')}
+									isInvalid={Boolean(touchedFields.email && errors.email)}
 								/>
 								<Form.Control.Feedback type="invalid">
-									{errors.username?.message}
+									{errors.email?.message}
 								</Form.Control.Feedback>
 							</Form.Group>
 
-							{/* Password */}
-							<Form.Group controlId="password">
-								<Form.Label>Mật khẩu</Form.Label>
-								<Form.Control
-									type="password"
-									placeholder="Password..."
-									{...register('password', { required: true })}
-									isInvalid={Boolean(touchedFields.password && errors.password)}
-								/>
-								<Form.Control.Feedback type="invalid">
-									{errors.password?.message}
-								</Form.Control.Feedback>
-							</Form.Group>
-
-							{/* Button Login */}
+							{/* Button Forgot */}
 							<Form.Group>
 								<Button variant="primary" type="submit" block disabled={isSubmitting}>
-									{isSubmitting ? 'Đăng nhập...' : 'Đăng nhập'}
+									{isSubmitting ? 'Xác minh...' : 'Xác minh'}
 								</Button>
 							</Form.Group>
-
-							{/* Button Register */}
-							<Link href="/accounts/register" passHref>
-								<Button variant="outline-light" block>
-									Đăng ký
-								</Button>
-							</Link>
-
-							{/* Button forgot */}
-							<Link href="/accounts/forgot" passHref>
-								<Button variant="" block>
-									Quên mật khẩu ?
-								</Button>
-							</Link>
 
 							{/* Button Go home */}
 							<Button variant="link" block onClick={handleGoBackClick}>

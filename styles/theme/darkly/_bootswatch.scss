@@ -3,7 +3,7 @@
 
 // Variables
 
-$web-font-path: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap' !default;
+$web-font-path: 'https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap' !default;
 @if $web-font-path {
 	@import url($web-font-path);
 }
@@ -66,9 +66,7 @@ $web-font-path: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0
 	@each $color, $value in $theme-colors {
 		&-#{$color} {
 			@if $enable-gradients {
-				background: $value
-					linear-gradient(180deg, mix($white, $value, 15%), $value)
-					repeat-x;
+				background: $value linear-gradient(180deg, mix($white, $value, 15%), $value) repeat-x;
 			} @else {
 				background-color: $value;
 			}
