@@ -7,7 +7,7 @@ import { Badge, Card, ListGroup, Spinner, Table } from 'react-bootstrap';
 
 interface Props {
 	date?: string;
-	onTimeSelect: (showtime?: Showtime) => void;
+	onTimeSelect?: (showtime?: Showtime) => void;
 }
 
 export const TimeSelectCard = ({ date, onTimeSelect }: Props) => {
@@ -32,9 +32,11 @@ export const TimeSelectCard = ({ date, onTimeSelect }: Props) => {
 		}
 	}, [date]);
 
-	const handleSelect = (showtime: Showtime) => {
-		setSelectedTime(showtime.id as number);
-		onTimeSelect(showtime);
+	const handleSelect = (showtime?: Showtime) => {
+		if (showtime && onTimeSelect) {
+			setSelectedTime(showtime.id as number);
+			onTimeSelect(showtime);
+		}
 	};
 
 	return (
