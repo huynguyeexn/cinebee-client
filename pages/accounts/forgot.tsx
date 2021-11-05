@@ -60,12 +60,7 @@ const LoginPage: NextPageWithLayout = () => {
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		try {
 			const { username, password, fullname, email } = data;
-			await authApi.register({
-				username: username,
-				password: password,
-				email: email,
-				fullname: fullname,
-			});
+			console.log('forgot passowrd');
 		} catch (error) {
 			const msg = (error as AxiosError).response?.data?.message;
 			const errors = (error as AxiosError).response?.data?.errors;
@@ -87,53 +82,11 @@ const LoginPage: NextPageWithLayout = () => {
 				<Card>
 					<Card.Body>
 						<Form onSubmit={handleSubmit(onSubmit)}>
-							<h3 className="text-center mb-4">Đăng nhập</h3>
-
-							{/* Username */}
-							<Form.Group controlId="username">
-								<Form.Label>Tên tài khoản</Form.Label>
-								<Form.Control
-									type="text"
-									placeholder="Username..."
-									{...register('username')}
-									isInvalid={Boolean(touchedFields.username && errors.username)}
-								/>
-								<Form.Control.Feedback type="invalid">
-									{errors.username?.message}
-								</Form.Control.Feedback>
-							</Form.Group>
-
-							{/* Password */}
-							<Form.Group controlId="password">
-								<Form.Label>Mật khẩu</Form.Label>
-								<Form.Control
-									type="password"
-									placeholder="password..."
-									{...register('password')}
-									isInvalid={Boolean(touchedFields.password && errors.password)}
-								/>
-								<Form.Control.Feedback type="invalid">
-									{errors.password?.message}
-								</Form.Control.Feedback>
-							</Form.Group>
-
-							{/* Password Confirmation */}
-							<Form.Group controlId="passwordRepeat">
-								<Form.Label>Nhập lại mật khẩu</Form.Label>
-								<Form.Control
-									type="password"
-									placeholder="password..."
-									{...register('passwordRepeat')}
-									isInvalid={Boolean(touchedFields.passwordRepeat && errors.passwordRepeat)}
-								/>
-								<Form.Control.Feedback type="invalid">
-									{errors.passwordRepeat?.message}
-								</Form.Control.Feedback>
-							</Form.Group>
+							<h3 className="text-center mb-4">Quên mật khẩu</h3>
 
 							{/* Email */}
 							<Form.Group controlId="email">
-								<Form.Label>Email</Form.Label>
+								<Form.Label>Email đã đăng ký</Form.Label>
 								<Form.Control
 									type="text"
 									placeholder="Abc@gmail.com..."
@@ -145,40 +98,12 @@ const LoginPage: NextPageWithLayout = () => {
 								</Form.Control.Feedback>
 							</Form.Group>
 
-							{/* Fullname */}
-							<Form.Group controlId="fullname">
-								<Form.Label>Họ và tên</Form.Label>
-								<Form.Control
-									type="text"
-									placeholder="Nguyen Van A..."
-									{...register('fullname')}
-									isInvalid={Boolean(touchedFields.fullname && errors.fullname)}
-								/>
-								<Form.Control.Feedback type="invalid">
-									{errors.fullname?.message}
-								</Form.Control.Feedback>
-							</Form.Group>
-
-							{/* Button Register */}
+							{/* Button Forgot */}
 							<Form.Group>
 								<Button variant="primary" type="submit" block disabled={isSubmitting}>
-									{isSubmitting ? 'Đăng ký...' : 'Đăng ký'}
+									{isSubmitting ? 'Xác minh...' : 'Xác minh'}
 								</Button>
 							</Form.Group>
-
-							{/* Button Login */}
-							<Link href="/accounts/login" passHref>
-								<Button variant="outline-light" block>
-									Đăng nhập
-								</Button>
-							</Link>
-
-							{/* Button forgot */}
-							<Link href="/accounts/forgot" passHref>
-								<Button variant="" block>
-									Quên mật khẩu ?
-								</Button>
-							</Link>
 
 							{/* Button Go home */}
 							<Button variant="link" block onClick={handleGoBackClick}>

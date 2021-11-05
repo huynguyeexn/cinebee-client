@@ -1,0 +1,30 @@
+.showtime-page {
+	.list-group {
+		.list-group-item {
+			cursor: pointer;
+			&:hover {
+				background: $gray-700;
+			}
+			display: flex;
+			.content-info {
+				margin: 0 10px;
+				display: flex;
+				flex-direction: column;
+			}
+
+			&.selected {
+				background: $primary;
+				*:not(.badge) {
+					font-weight: 600;
+					color: $gray-700;
+				}
+			}
+
+			.showtime-time-table {
+				td {
+					text-align: center;
+				}
+			}
+		}
+	}
+}

@@ -1,6 +1,8 @@
 import axiosClient from 'api-client/axiosClient';
 import { AppPropsWithLayout } from 'interfaces';
 import { MainLayout } from 'layouts';
+import moment from 'moment';
+import 'moment/locale/vi'; // wi
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -10,6 +12,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import { SWRConfig } from 'swr';
 import '../styles/app.scss';
+
+moment.locale('vi');
 
 NProgress.configure({ showSpinner: false, easing: 'ease', speed: 500 });
 Router.events.on('routeChangeStart', (url) => {
