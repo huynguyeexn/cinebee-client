@@ -3,7 +3,7 @@ import { Movie, ShowTimeGroupDate } from 'interfaces';
 import moment from 'moment';
 import React from 'react';
 import { Card, ListGroup, Spinner } from 'react-bootstrap';
-import { capitalize } from 'utils';
+import { capitalize, formatDateWithDay } from 'utils';
 interface Props {
 	movie?: Movie;
 	onDateSelect: (date?: string) => void;
@@ -57,11 +57,7 @@ export const DateSelectCard = ({ movie, onDateSelect }: Props) => {
 								onClick={() => handleSelect(showtimeKey)}
 								className={`${selectedDate === showtimeKey ? 'selected' : ''}`}
 							>
-								{moment(showtimeKey).isSame(moment(), 'day') ? (
-									<span>Hôm nay, {moment(showtimeKey).format('L')}</span>
-								) : (
-									<span>{capitalize(moment(showtimeKey).format('dddd, L'))}</span>
-								)}
+								<span>{formatDateWithDay(showtimeKey)}</span>
 							</ListGroup.Item>
 						))
 					)}
