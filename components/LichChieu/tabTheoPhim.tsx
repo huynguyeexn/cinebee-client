@@ -50,7 +50,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 					<DateSelectCard movie={movie} onDateSelect={handleDateSelect} />
 				</Col>
 				<Col lg={4}>
-					<TimeSelectCard date={date} onTimeSelect={handleTimeSelect} />
+					<TimeSelectCard date={date} movie={movie} onTimeSelect={handleTimeSelect} />
 					<Row className="mb-2 text-right">
 						<Col xs={12}>
 							<Button
@@ -58,7 +58,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 								variant="primary"
 								block
 								className="mt-2"
-								onClick={() => router.push(`/lich-chieu/${time}`)}
+								onClick={() => router.push(`/dat-lich/${time}`)}
 							>
 								{time ? 'Đặt vé' : 'Hãy chọn xuất chiếu'}
 							</Button>

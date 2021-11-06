@@ -1,5 +1,5 @@
 import { showtimesApi } from 'api-client/showtimeApi';
-import { Showtime } from 'interfaces';
+import { Movie, Showtime } from 'interfaces';
 import moment from 'moment';
 import Image from 'next/image';
 import React from 'react';
@@ -7,10 +7,11 @@ import { Badge, Card, ListGroup, Spinner, Table } from 'react-bootstrap';
 
 interface Props {
 	date?: string;
+	movie?: Movie;
 	onTimeSelect?: (showtime?: Showtime) => void;
 }
 
-export const TimeSelectCard = ({ date, onTimeSelect }: Props) => {
+export const TimeSelectCard = ({ date, movie, onTimeSelect }: Props) => {
 	const [time, setTime] = React.useState<Showtime[]>([]);
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
 	const [selectedTime, setSelectedTime] = React.useState<number>();
@@ -18,11 +19,11 @@ export const TimeSelectCard = ({ date, onTimeSelect }: Props) => {
 	React.useEffect(() => {
 		setTime([]);
 		setSelectedTime(undefined);
-		if (date) {
+		if (date && movie) {
 			setIsLoading(true);
 			(async () => {
 				try {
-					const response = await showtimesApi.getShowtimesByDate(date);
+					const response = await showtimesApi.getShowtimesByDate(date, movie.id);
 					setTime(response.data);
 				} catch (error) {
 					console.error('Failed to get showtime list:', error);
@@ -30,7 +31,7 @@ export const TimeSelectCard = ({ date, onTimeSelect }: Props) => {
 				setIsLoading(false);
 			})();
 		}
-	}, [date]);
+	}, [date, movie]);
 
 	const handleSelect = (showtime?: Showtime) => {
 		if (showtime && onTimeSelect) {
