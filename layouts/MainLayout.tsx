@@ -1,12 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import { Footer, TopNav } from 'components';
+import { LayoutProps } from 'interfaces';
 
-interface Props {
-	children: any;
-}
-
-export const MainLayout = ({ children }: Props) => {
+export const MainLayout = ({ children }: LayoutProps) => {
 	return (
 		<>
 			<Head>

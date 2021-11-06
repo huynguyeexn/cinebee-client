@@ -1,0 +1,44 @@
+.movie-detail {
+	overflow: hidden;
+	&--banner {
+		position: relative;
+		height: 80vh;
+		min-width: 100vw;
+
+		img {
+			transform: scale(1.1);
+			filter: blur(3px) brightness(0.5);
+		}
+	}
+
+	&--content {
+		// height: 80vh;
+		transform: translateY(-350px);
+	}
+
+	&--poster {
+		display: flex;
+		position: relative;
+	}
+
+	&--thumb {
+		border-radius: 0.5rem;
+		overflow: hidden;
+		position: relative;
+		height: 450px;
+		width: 300px;
+		max-width: 80vw;
+	}
+
+	&--info {
+		p,
+		h1 {
+			margin: 0;
+		}
+		color: $white;
+		// transform: translateY(230px) translateX(20px);
+		position: absolute;
+		bottom: 120px;
+		left: 330px;
+	}
+}
