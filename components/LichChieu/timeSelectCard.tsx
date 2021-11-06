@@ -23,7 +23,7 @@ export const TimeSelectCard = ({ date, movie, onTimeSelect }: Props) => {
 			setIsLoading(true);
 			(async () => {
 				try {
-					const response = await showtimesApi.getShowtimesByDate(date, movie.id);
+					const response = await showtimesApi.getShowtimesByDate(date, movie.id as number);
 					setTime(response.data);
 				} catch (error) {
 					console.error('Failed to get showtime list:', error);
