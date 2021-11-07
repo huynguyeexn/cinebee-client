@@ -124,7 +124,7 @@ footer p {
 }
 
 .padding {
-	padding: 20px;
+	padding: 20px 30px;
 }
 
 .tab-content {
@@ -149,7 +149,7 @@ footer p {
 		padding-left: unset;
 		padding-right: unset;
 			.nav-link.active {
-				background-color: #424242;
+				background-color: #ffee32;
 				color: #fff;
 				position: relative;
 				border-bottom: 1px solid rgb(136, 136, 136);
@@ -166,26 +166,28 @@ footer p {
 				}
 			}
 			.nav-link.active:hover, .nav-link.active:focus {
-				color: #fff;
+				color: #2e2e2e;
 			}
 			.nav-item a{
-				color: #fff;
+				color: #ffff;
 				background-color: #2e2e2e;
 				border-radius: unset;
-				padding: 30px ;
+				padding: 30px;
+				border-bottom: 1px solid rgba(255, 255, 255, 0);
 			}
 			.nav-item a:hover {
-				background-color: #414141;
+				background-color: #ffee32;
 				border-bottom: 1px solid rgb(136, 136, 136);
+				color: #2e2e2e;
 			}
 	}
 
 }
 
 .avatar {
-	max-width: 250px;
+	max-width: 200px;
 	width: 100%;
-	height: 250px;
+	height: 200px;
 	position: relative;
 	margin: 0 auto;
 	img {

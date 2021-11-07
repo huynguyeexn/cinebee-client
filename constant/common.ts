@@ -27,3 +27,5 @@ export const AGE_RATING = [
 		value: 4,
 	},
 ];
+
+export const GENDER = ['Nam', 'Nữ', 'Khác'];

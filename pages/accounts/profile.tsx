@@ -6,6 +6,8 @@ import { Col, Container, Table, Nav, Row, Tab } from 'react-bootstrap';
 import {FaUser} from 'react-icons/fa';
 import {MdDateRange, MdEmail} from 'react-icons/md';
 import {IoMdHome, IoMdMale, IoMdFemale, IoMdPhonePortrait} from 'react-icons/io';
+import { GENDER } from 'constant';
+
 
 interface Props {}
 
@@ -70,14 +72,15 @@ const ProfilePage = (props: Props) => {
 											</div>
 											<div className="row col">
 												<div className="col-md-12 col-form-label">
-														<div className="form-check form-check-inline">
+{/* 														<div className="form-check form-check-inline">
 															<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value='1' checked/>
 															<label className="form-check-label"><IoMdMale /></label>
 														</div>
 														<div className="form-check form-check-inline">
 															<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value='2' />
 															<label className="form-check-label"><IoMdFemale /></label>
-														</div>
+														</div> */}
+														<p>Giới tính: {GENDER[profile.gender]}</p> 
 												</div>
 											</div>
 										</div>
