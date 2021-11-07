@@ -144,12 +144,12 @@ footer p {
 	.bg-left {
 		width: 100%;
 		min-height: 85vh;
-		background: #48474899;
 		border-radius: 5px 0px 0px 5px;
+		border-right: 1px solid $gray-600;
 		padding-left: unset;
 		padding-right: unset;
 			.nav-link.active {
-				background-color: #ffee32;
+				background-color: $primary;
 				color: #fff;
 				position: relative;
 				border-bottom: 1px solid rgb(136, 136, 136);
@@ -166,19 +166,18 @@ footer p {
 				}
 			}
 			.nav-link.active:hover, .nav-link.active:focus {
-				color: #2e2e2e;
+				color: $gray-900;
 			}
 			.nav-item a{
 				color: #ffff;
-				background-color: #2e2e2e;
 				border-radius: unset;
 				padding: 30px;
 				border-bottom: 1px solid rgba(255, 255, 255, 0);
 			}
 			.nav-item a:hover {
-				background-color: #ffee32;
+				background-color: $primary;
 				border-bottom: 1px solid rgb(136, 136, 136);
-				color: #2e2e2e;
+				color: $gray-900;
 			}
 	}
 
