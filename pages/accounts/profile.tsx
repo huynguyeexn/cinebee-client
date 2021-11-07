@@ -80,7 +80,7 @@ const ProfilePage = (props: Props) => {
 															<input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value='2' />
 															<label className="form-check-label"><IoMdFemale /></label>
 														</div> */}
-														<p>Giới tính: {GENDER[profile.gender]}</p> 
+														<p>Giới tính: {GENDER[profile?.gender]}</p> 
 												</div>
 											</div>
 										</div>
