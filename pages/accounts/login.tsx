@@ -33,6 +33,7 @@ const LoginPage: NextPageWithLayout = () => {
 	});
 
 	const [googleUrl, setGoogleUrl] = React.useState(null);
+	const [facebookUrl, setFacebookUrl] = React.useState(null);
 
 	const {
 		register,
@@ -46,6 +47,9 @@ const LoginPage: NextPageWithLayout = () => {
 		(() => {
 			authApi.getGoogleLoginUrl().then((res) => {
 				setGoogleUrl(res.data);
+			});
+			authApi.getFacebookLoginUrl().then((res) => {
+				setFacebookUrl(res.data);
 			});
 		})();
 
@@ -143,9 +147,11 @@ const LoginPage: NextPageWithLayout = () => {
 										<FaGoogle />
 									</Button>
 								)}
-								<Button variant="outline-light" className="mr-2">
-									<FaFacebookF />
-								</Button>
+								{facebookUrl && (
+									<Button variant="outline-light" className="mr-2">
+										<FaFacebookF />
+									</Button>
+								)}
 							</div>
 
 							{/* Button Go home */}
