@@ -129,6 +129,7 @@ footer p {
 
 .tab-content {
 	padding: 10px 20px;
+	height: 85vh;
 }
 
 .bg {
@@ -140,10 +141,10 @@ footer p {
 	min-height: 70vh;
 }
 
-.col-lg-4 {
+.col-lg-3 {
 	.bg-left {
 		width: 100%;
-		min-height: 85vh;
+		min-height: 100%;
 		border-radius: 5px 0px 0px 5px;
 		border-right: 1px solid $gray-600;
 		padding-left: unset;
@@ -156,8 +157,8 @@ footer p {
 				&::before{
 					content: "";
 					position: absolute;
-					top: 30px;
-					left: 340px;
+					top: 22px;
+					left: 245px;
 					width: 0;
 					height: 0;
 					border-top: 10px solid transparent;
@@ -171,7 +172,7 @@ footer p {
 			.nav-item a{
 				color: $white;
 				border-radius: unset;
-				padding: 30px;
+				padding: 20px;
 				border-bottom: 1px solid rgba(255, 255, 255, 0);
 			}
 			.nav-item a:hover {
@@ -195,7 +196,7 @@ footer p {
 }
 
 .infor-user {
-	padding: 10px 100px;
+	padding: 10px 135px;
 
 	.form-check-label {
 		position: unset;
@@ -208,21 +209,75 @@ footer p {
 		background: none;
 		transition: 0.5s;
 		border: none;
-		border-bottom: 1px solid #898989b0;
+		border-bottom: 1px solid $gray-700;
 		padding: 6px 30px !important;
 		color: #fff;
 	}
 	input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus{
 		outline: none;
-		border-bottom: 1px solid white;
+		border-bottom: 1px solid $white;
+	}
+	.form-group {
+		.col-2 {
+			span {
+				padding: 9px 10px;
+				background: $gray-700;
+				border-radius: 50% 50%;
+				margin-right: 5px;
+				color: $gray-400;
+			}
+		}
+		.col-10 {
+			p {
+				color: $gray-400;
+			}
+		}
 	}
 }
 /* End thông tin tài khoản */
+
+@media (max-width: 1199.98px) {
+	.infor-user {
+		padding: 0 50px;
+		.form-group {
+			padding: 2px 0px;
+			.col-2 {
+				span {
+					padding: 9px 10px;
+					background: $gray-600;
+					border-radius: 50% 50%;
+					margin-right: 5px;
+				}
+			}
+			.col-10 {
+				p {
+					color: $gray-400;
+				}
+			}
+		}
+	}
+}
 
 @media (max-width: 991.98px) {
 	/* reponsive thông tin tài khoản */
 	.infor-user {
 		padding: 10px 20px;
+		.form-group {
+			padding: 2px 0px;
+			.col-2 {
+				span {
+					padding: 9px 10px;
+					background: $gray-600;
+					border-radius: 50% 50%;
+					margin-right: 5px;
+				}
+			}
+			.col-10 {
+				p {
+					color: $gray-400;
+				}
+			}
+		}
 	}
 	.col-lg-4 {
 		.bg-left {
