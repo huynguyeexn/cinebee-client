@@ -1,4 +1,4 @@
-import { LoginPayload, RegisterPayload } from 'interfaces';
+import { LoginPayload, RegisterPayload, SocialLoginPayload } from 'interfaces';
 import axiosClient from './axiosClient';
 
 export const authApi = {
@@ -16,5 +16,17 @@ export const authApi = {
 
 	getProfile() {
 		return axiosClient.get('/accounts/me');
+	},
+
+	loginWithSocial(payload: string) {
+		return axiosClient.get(payload);
+	},
+
+	getGoogleLoginUrl() {
+		return axiosClient.get('/accounts/auth/google/url');
+	},
+
+	getFacebookLoginUrl() {
+		return axiosClient.get('/accounts/auth/facebook/url');
 	},
 };
