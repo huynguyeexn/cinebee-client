@@ -148,7 +148,11 @@ const LoginPage: NextPageWithLayout = () => {
 									</Button>
 								)}
 								{facebookUrl && (
-									<Button variant="outline-light" className="mr-2">
+									<Button
+										variant="outline-light"
+										className="mr-2"
+										onClick={() => (window.location.href = facebookUrl)}
+									>
 										<FaFacebookF />
 									</Button>
 								)}
