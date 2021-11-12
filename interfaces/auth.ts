@@ -9,3 +9,7 @@ export interface RegisterPayload {
 	email: string;
 	fullname: string;
 }
+
+export interface SocialLoginPayload {
+	[key: string]: string;
+}
