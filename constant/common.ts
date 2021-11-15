@@ -29,3 +29,5 @@ export const AGE_RATING = [
 ];
 
 export const GENDER = ['Nam', 'Nữ', 'Khác'];
+
+export const MOVIE_STATUS = ['Phim Ngừng chiếu', 'Phim Đang chiếu', 'Phim Sắp chiếu'];

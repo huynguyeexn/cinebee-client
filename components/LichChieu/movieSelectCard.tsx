@@ -31,7 +31,7 @@ export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
+	
 	const [selected, setSelected] = React.useState<number>();
 
 	const handleSelect = (movie: Movie) => {
