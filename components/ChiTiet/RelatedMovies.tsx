@@ -1,17 +1,15 @@
-import React from 'react'
-import { Col, Row } from 'react-bootstrap'
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { MovieCard } from 'components';
 import Carousel from 'nuka-carousel';
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { Movie } from 'interfaces';
 import { movieApi } from 'api-client/movieApi';
 
-interface Props {
-    
-}
+interface Props {}
 
 export const RelatedMovies = (props: Props) => {
-    // const movies = [
+	// const movies = [
 	// 	{
 	// 		imageUrl: 'https://www.themoviedb.org/t/p/original/bZnOioDq1ldaxKfUoj3DenHU7mp.jpg',
 	// 		name: 'Jurassic Hunt',
@@ -57,90 +55,85 @@ export const RelatedMovies = (props: Props) => {
 	// ];
 	const [movie, setMovie] = React.useState([]);
 	const [movieLoading, setMovieLoading] = React.useState(false);
-    
+
 	React.useEffect(() => {
-			(async () => {
-				try {
-					const response = await movieApi.getMovie();
-					setMovie(response.data);
-				} catch (error) {
-					console.error('Failed to get movies playing: ', error);
-				}
-			})();
+		(async () => {
+			try {
+				const response = await movieApi.getMovie();
+				setMovie(response.data);
+			} catch (error) {
+				console.error('Failed to get movies playing: ', error);
+			}
+		})();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	
-	const slidesToShow = 5
-    const slidesToScroll = 2
+
+	const slidesToShow = 5;
+	const slidesToScroll = 2;
 
 	const configCarouselBtn = {
-        nextButtonClassName: "btn-carousel next",
-        prevButtonClassName: "btn-carousel prev",
-        nextButtonText: <FaChevronRight />,
-        prevButtonText: <FaChevronLeft />,
-        pagingDotsStyle: {
-            fill: 'rgba(93, 172, 70, 1)'
-        },
-        nextButtonStyle: {
-            position: "relative",
-            right: "-40px",
-    		top: "-77px",
-            width: "40px",
-            height: "40px",
-            borderRadius: "50%",
-            background: "rgb(32 32 32)",
-            border: "none",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            cursor: "pointer",
-			color: "#dbcc2b",
-			fontSize: "40px"
-        },
-        prevButtonStyle: {
-            position: "relative",
-            left: "-40px",
-    		top: "-77px",
-            width: "40px",
-            height: "40px",
-            borderRadius: "50%",
-            background: "rgb(32 32 32)",
-            border: "none",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            cursor: "pointer",
-			color: "#dbcc2b",
-			fontSize: "40px"
-        }
-    }
+		nextButtonClassName: 'btn-carousel next',
+		prevButtonClassName: 'btn-carousel prev',
+		nextButtonText: <FaChevronRight />,
+		prevButtonText: <FaChevronLeft />,
+		pagingDotsStyle: {
+			fill: 'rgba(93, 172, 70, 1)',
+		},
+		nextButtonStyle: {
+			position: 'relative',
+			right: '-40px',
+			top: '-77px',
+			width: '40px',
+			height: '40px',
+			borderRadius: '50%',
+			background: 'rgb(32 32 32)',
+			border: 'none',
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			cursor: 'pointer',
+			color: '#dbcc2b',
+			fontSize: '40px',
+		},
+		prevButtonStyle: {
+			position: 'relative',
+			left: '-40px',
+			top: '-77px',
+			width: '40px',
+			height: '40px',
+			borderRadius: '50%',
+			background: 'rgb(32 32 32)',
+			border: 'none',
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			cursor: 'pointer',
+			color: '#dbcc2b',
+			fontSize: '40px',
+		},
+	};
 
-
-    return (
-        <section>
-            <Row className="page-title">
-                <Col>
-                    <h3 className="page-title--title">Phim Sắp Chiếu</h3>
-                </Col>
-            </Row>
-            <Row>
-				<Carousel
-					slidesToShow={slidesToShow}
-					slidesToScroll={slidesToScroll}
-				 	defaultControlsConfig={configCarouselBtn}
-				>
+	return (
+		<section>
+			<Row className="page-title">
+				<Col>
+					<h3 className="page-title--title">Phim Sắp Chiếu</h3>
+				</Col>
+			</Row>
+			<Row>
+				<Carousel slidesToShow={slidesToShow} slidesToScroll={slidesToScroll}>
 					{movie.map((movies: Movie) => (
-							<Col key={movies.id}>
-								<MovieCard
-									imageUrl={movies.posters_full[0]?.url || ''}
-									name={movies.name}
-									release={movies.release_date}
-									durations={movies.running_time}
-								/>
-							</Col>
+						<Col key={movies.id}>
+							<MovieCard
+								imageUrl={movies.posters_full[0]?.url || ''}
+								name={movies.name}
+								release={movies.release_date}
+								durations={movies.running_time}
+							/>
+						</Col>
 					))}
 				</Carousel>
-            </Row>
-        </section>
-    )
-}
+			</Row>
+		</section>
+	);
+};
