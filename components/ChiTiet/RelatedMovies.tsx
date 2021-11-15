@@ -122,14 +122,9 @@ export const RelatedMovies = (props: Props) => {
 			</Row>
 			<Row>
 				<Carousel slidesToShow={slidesToShow} slidesToScroll={slidesToScroll}>
-					{movie.map((movies: Movie) => (
-						<Col key={movies.id}>
-							<MovieCard
-								imageUrl={movies.posters_full[0]?.url || ''}
-								name={movies.name}
-								release={movies.release_date}
-								durations={movies.running_time}
-							/>
+					{movie.map((movie: Movie) => (
+						<Col key={movie.id}>
+							<MovieCard movie={movie} />
 						</Col>
 					))}
 				</Carousel>
