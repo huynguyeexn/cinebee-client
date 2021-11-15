@@ -9,8 +9,10 @@ import React from 'react';
 import { Button, Card, Col, Container, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
+import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { ToastError } from 'utils';
 import * as yup from 'yup';
+import { authApi } from 'api-client';
 
 type Inputs = {
 	username: string;
@@ -30,6 +32,9 @@ const LoginPage: NextPageWithLayout = () => {
 		revalidateOnMount: false,
 	});
 
+	const [googleUrl, setGoogleUrl] = React.useState(null);
+	const [facebookUrl, setFacebookUrl] = React.useState(null);
+
 	const {
 		register,
 		handleSubmit,
@@ -39,6 +44,15 @@ const LoginPage: NextPageWithLayout = () => {
 	});
 
 	React.useEffect(() => {
+		(() => {
+			authApi.getGoogleLoginUrl().then((res) => {
+				setGoogleUrl(res.data);
+			});
+			authApi.getFacebookLoginUrl().then((res) => {
+				setFacebookUrl(res.data);
+			});
+		})();
+
 		if (profile) {
 			router.push('/');
 		}
@@ -121,6 +135,28 @@ const LoginPage: NextPageWithLayout = () => {
 									Quên mật khẩu ?
 								</Button>
 							</Link>
+
+							{/* Social login buttons */}
+							<div className="d-flex justify-content-center">
+								{googleUrl && (
+									<Button
+										variant="outline-light"
+										className="mr-2"
+										onClick={() => (window.location.href = googleUrl)}
+									>
+										<FaGoogle />
+									</Button>
+								)}
+								{facebookUrl && (
+									<Button
+										variant="outline-light"
+										className="mr-2"
+										onClick={() => (window.location.href = facebookUrl)}
+									>
+										<FaFacebookF />
+									</Button>
+								)}
+							</div>
 
 							{/* Button Go home */}
 							<Button variant="link" block onClick={handleGoBackClick}>

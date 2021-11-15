@@ -1,5 +1,6 @@
 import { authApi } from 'api-client';
 import { ONE_MINUTE } from 'constant';
+import { SocialLoginPayload } from 'interfaces';
 import useSWR from 'swr';
 import { PublicConfiguration } from 'swr/dist/types';
 
@@ -34,6 +35,11 @@ export function useAuth(options?: Partial<PublicConfiguration>) {
 		mutate(null, false);
 	}
 
+	async function loginWithSocial(payload: string) {
+		await authApi.loginWithSocial(payload);
+		await mutate();
+	}
+
 	return {
 		profile,
 		error,
@@ -42,5 +48,6 @@ export function useAuth(options?: Partial<PublicConfiguration>) {
 		mutate,
 		login,
 		logout,
+		loginWithSocial,
 	};
 }

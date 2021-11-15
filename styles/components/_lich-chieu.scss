@@ -9,7 +9,12 @@
 			.content-info {
 				margin: 0 10px;
 				display: flex;
+				justify-content: center;
 				flex-direction: column;
+			}
+
+			.movie-poster {
+				min-width: 50px !important;
 			}
 
 			&.selected {
@@ -24,6 +29,8 @@
 				td {
 					text-align: center;
 				}
+
+				margin: 0;
 			}
 		}
 	}
