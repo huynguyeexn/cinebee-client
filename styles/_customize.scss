@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
+
 main {
 	min-height: calc(100vh - 190px);
 	margin-top: 70px;
 	display: block;
+}
+
+.logo-text {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 900;
 }
 
 /* TOP NAVBAR */
@@ -19,7 +26,6 @@ main {
 	overflow: hidden;
 	box-shadow: 0px 0px 20px -10px rgb(0 0 0 / 50%);
 }
-
 
 /* Custom Slider  */
 .slick-slider {
@@ -119,8 +125,8 @@ footer p {
 }
 
 /* thông tin tài khoản */
-.page-title--title{
-	margin-top:20px;
+.page-title--title {
+	margin-top: 20px;
 }
 
 .padding {
@@ -133,9 +139,9 @@ footer p {
 
 .bg {
 	background: #2e2e2e;
-    border-radius: 5px;
+	border-radius: 5px;
 	width: 100%;
-    margin: 0 auto;
+	margin: 0 auto;
 	position: relative;
 	min-height: 70vh;
 }
@@ -148,39 +154,39 @@ footer p {
 		border-right: 1px solid $gray-600;
 		padding-left: unset;
 		padding-right: unset;
-			.nav-link.active {
-				background-color: $primary;
-				color: $white;
-				position: relative;
-				border-bottom: 1px solid rgb(136, 136, 136);
-				&::before{
-					content: "";
-					position: absolute;
-					top: 30px;
-					left: 340px;
-					width: 0;
-					height: 0;
-					border-top: 10px solid transparent;
-					border-bottom: 10px solid transparent;
-					border-right:10px solid #2e2e2e;
-				}
+		.nav-link.active {
+			background-color: $primary;
+			color: $white;
+			position: relative;
+			border-bottom: 1px solid rgb(136, 136, 136);
+			&::before {
+				content: '';
+				position: absolute;
+				top: 30px;
+				left: 340px;
+				width: 0;
+				height: 0;
+				border-top: 10px solid transparent;
+				border-bottom: 10px solid transparent;
+				border-right: 10px solid #2e2e2e;
 			}
-			.nav-link.active:hover, .nav-link.active:focus {
-				color: $gray-900;
-			}
-			.nav-item a{
-				color: $white;
-				border-radius: unset;
-				padding: 30px;
-				border-bottom: 1px solid rgba(255, 255, 255, 0);
-			}
-			.nav-item a:hover {
-				background-color: $primary;
-				border-bottom: 1px solid rgb(136, 136, 136);
-				color: $gray-900;
-			}
+		}
+		.nav-link.active:hover,
+		.nav-link.active:focus {
+			color: $gray-900;
+		}
+		.nav-item a {
+			color: $white;
+			border-radius: unset;
+			padding: 30px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0);
+		}
+		.nav-item a:hover {
+			background-color: $primary;
+			border-bottom: 1px solid rgb(136, 136, 136);
+			color: $gray-900;
+		}
 	}
-
 }
 
 .avatar {
@@ -200,10 +206,12 @@ footer p {
 	.form-check-label {
 		position: unset;
 	}
-	label{
+	label {
 		position: absolute;
 	}
-	input[type="text"], input[type="email"], input[type="date"] {
+	input[type='text'],
+	input[type='email'],
+	input[type='date'] {
 		position: relative;
 		background: none;
 		transition: 0.5s;
@@ -212,7 +220,9 @@ footer p {
 		padding: 6px 30px !important;
 		color: #fff;
 	}
-	input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus{
+	input[type='text']:focus,
+	input[type='email']:focus,
+	input[type='date']:focus {
 		outline: none;
 		border-bottom: 1px solid white;
 	}
@@ -232,7 +242,7 @@ footer p {
 					display: none;
 				}
 				&::after {
-					content: "";
+					content: '';
 					position: absolute;
 					top: 27px;
 					left: 0px;
@@ -261,7 +271,7 @@ footer p {
 					display: none;
 				}
 				&::after {
-					content: "";
+					content: '';
 					position: absolute;
 					top: 27px;
 					left: 0px;
