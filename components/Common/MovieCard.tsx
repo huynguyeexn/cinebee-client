@@ -11,6 +11,7 @@ interface Props {
 }
 
 export const MovieCard = ({ imageUrl, name, release, durations }: Props) => {
+	
 	return (
 		<div className="movie-card">
 			<div className="movie-thumb">
@@ -26,7 +27,7 @@ export const MovieCard = ({ imageUrl, name, release, durations }: Props) => {
 			<div className="movie-summary">
 				<Badge variant="success">C16</Badge>
 				<h5 className="movie-link">
-					<Link href="phim/jurassic-hunt">{name}</Link>
+					<Link href="phim/3">{name}</Link>
 				</h5>
 				<p>Khởi chiếu: {release}</p>
 				<p>{durations} phút</p>
