@@ -7,10 +7,10 @@ export const MainLayout = ({ children }: LayoutProps) => {
 	return (
 		<>
 			<Head>
-				<title>Cinebee - Cinema management system</title>
+				<title>Cinebee - Rạp chiếu phim</title>
 				<meta
 					name="description"
-					content="Cinebee - Cinema management system - product of Raccoon Team"
+					content="Cinebee - Rạp chiếu phim"
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
