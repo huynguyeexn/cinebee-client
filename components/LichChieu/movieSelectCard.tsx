@@ -59,20 +59,30 @@ export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
 									onClick={() => handleSelect(movie)}
 									className={`list-group-item ${selected === movie.id ? 'selected' : ''}`}
 								>
-									<Image
-										loader={() => movie.posters_full[0]?.url || ''}
-										src={movie.posters_full[0]?.url || ''}
-										alt={'poster ' + movie.name}
-										height={70}
-										width={40}
-										unoptimized={true}
-									/>
+									<div className="movie-poster">
+										<Image
+											loader={() =>
+												movie.posters_full[0]?.url || '/assets/images/image-not-found.svg'
+											}
+											src={movie.posters_full[0]?.url || '/assets/images/image-not-found.svg'}
+											alt={'poster ' + movie.name}
+											height={70}
+											width={50}
+											unoptimized={true}
+										/>
+									</div>
 									<div className="content-info">
-										<Badge pill variant={getAgeRatingBadgeColor(movie.age_rating_id)}>
-											{AGE_RATING[movie.age_rating_id].label}
-										</Badge>
 										<div>{movie.name}</div>
-										<small>{minutesToHoursMinutes(movie.running_time)}</small>
+										<div>
+											<Badge
+												pill
+												variant={getAgeRatingBadgeColor(movie.age_rating_id)}
+												className="mr-2"
+											>
+												{AGE_RATING[movie.age_rating_id].code}
+											</Badge>
+											<small>{minutesToHoursMinutes(movie.running_time)}</small>
+										</div>
 									</div>
 								</ListGroup.Item>
 							))}
