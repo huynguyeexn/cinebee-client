@@ -31,7 +31,7 @@ export const TopNav = (props: Props) => {
 		>
 			<Container>
 				<Link href="/" passHref>
-					<Navbar.Brand className="h4 mb-0">Cinebee</Navbar.Brand>
+					<Navbar.Brand className="h4 mb-0 logo-text">CINEBEE</Navbar.Brand>
 				</Link>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav">
 					<CgMenuRight />

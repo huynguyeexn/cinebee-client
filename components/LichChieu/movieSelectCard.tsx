@@ -61,8 +61,10 @@ export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
 								>
 									<div className="movie-poster">
 										<Image
-											loader={() => movie.posters_full[0]?.url || ''}
-											src={movie.posters_full[0]?.url || ''}
+											loader={() =>
+												movie.posters_full[0]?.url || '/assets/images/image-not-found.svg'
+											}
+											src={movie.posters_full[0]?.url || '/assets/images/image-not-found.svg'}
 											alt={'poster ' + movie.name}
 											height={70}
 											width={50}

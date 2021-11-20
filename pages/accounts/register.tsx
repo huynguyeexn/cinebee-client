@@ -181,7 +181,7 @@ const LoginPage: NextPageWithLayout = () => {
 							</Link>
 
 							{/* Button Go home */}
-							<Button variant="link" block onClick={handleGoBackClick}>
+							<Button variant="link" block onClick={handleGoBackClick} className="mt-2">
 								<IoArrowBackCircleOutline className="mr-2" style={{ fontSize: '2rem' }} />
 							</Button>
 						</Form>
