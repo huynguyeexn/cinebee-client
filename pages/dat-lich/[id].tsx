@@ -41,6 +41,10 @@ const DatLichPage = (props: Props) => {
 		setSeatSelected([]);
 	};
 
+	const handleDatVe = () => {
+		router.push(`/thanh-toan?showtime=${id}&seats=${seatSelected}`);
+	};
+
 	return (
 		<Container fluid className="dat-lich-page">
 			<Row>
@@ -102,7 +106,11 @@ const DatLichPage = (props: Props) => {
 							>
 								Chọn lại
 							</Button>{' '}
-							<Button variant="primary" disabled={!seatSelected.length}>
+							<Button
+								variant="primary"
+								disabled={!seatSelected.length}
+								onClick={() => handleDatVe()}
+							>
 								Đặt vé
 							</Button>
 						</Card.Body>
