@@ -1,13 +1,15 @@
-import React from 'react';
-import { Container, Dropdown, Nav, Navbar, NavDropdown, SplitButton } from 'react-bootstrap';
-import { FaRegUser } from 'react-icons/fa';
-import { CgMenuRight } from 'react-icons/cg';
-import { RiArrowDownSLine } from 'react-icons/ri';
-import { FiLogOut } from 'react-icons/fi';
-import { AiOutlineInfo } from 'react-icons/ai';
-import Link from 'next/link';
 import { useAuth } from 'hooks';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { AiOutlineInfo } from 'react-icons/ai';
+import { CgMenuRight } from 'react-icons/cg';
+import { FaRegUser } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
+import { RiArrowDownSLine } from 'react-icons/ri';
+import Image from 'next/image';
+import logo from '../../public/assets/images/Cinebee-logo-text.png';
 
 interface Props {}
 
@@ -31,7 +33,9 @@ export const TopNav = (props: Props) => {
 		>
 			<Container>
 				<Link href="/" passHref>
-					<Navbar.Brand className="h4 mb-0">Cinebee</Navbar.Brand>
+					<Navbar.Brand className="h4 mb-0 logo-text">
+						<Image src={logo} alt="cinebee-logo" height={30} width={143.25}/>
+					</Navbar.Brand>
 				</Link>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav">
 					<CgMenuRight />

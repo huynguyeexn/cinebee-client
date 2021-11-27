@@ -7,20 +7,16 @@ interface Props {}
 export const BannerHeader = (props: Props) => {
 	const bannders = [
 		{
-			imageUrl:
-				'https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg',
+			imageUrl: 'https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg',
 		},
 		{
-			imageUrl:
-				'https://www.themoviedb.org/t/p/original/zWYCRc1Hn1gEcJtQCMvSODd6gJu.jpg',
+			imageUrl: 'https://www.themoviedb.org/t/p/original/zWYCRc1Hn1gEcJtQCMvSODd6gJu.jpg',
 		},
 		{
-			imageUrl:
-				'https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg',
+			imageUrl: 'https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg',
 		},
 		{
-			imageUrl:
-				'https://www.themoviedb.org/t/p/original/h4oh0UNGqz6CRmYVIq8ocSbKdo3.jpg',
+			imageUrl: 'https://www.themoviedb.org/t/p/original/h4oh0UNGqz6CRmYVIq8ocSbKdo3.jpg',
 		},
 	];
 
@@ -47,8 +43,8 @@ export const BannerHeader = (props: Props) => {
 							<div className="banner-header-item">
 								<Image
 									priority={true}
-									src={banner.imageUrl}
-									loader={() => banner.imageUrl}
+									src={banner.imageUrl || '/assets/images/image-not-found.svg'}
+									loader={() => banner.imageUrl || '/assets/images/image-not-found.svg'}
 									alt=""
 									layout="fill"
 									objectFit="cover"
