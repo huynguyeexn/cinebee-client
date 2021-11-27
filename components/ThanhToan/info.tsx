@@ -7,7 +7,7 @@ import { Total } from './total';
 import { User } from './user';
 
 interface Props {
-	showtime?: Showtime;
+	showtime: Showtime;
 	price: number;
 	seats: number[];
 }

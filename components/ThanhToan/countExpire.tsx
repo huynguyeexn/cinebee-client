@@ -6,7 +6,7 @@ import { GiSeaStar } from 'react-icons/gi';
 import { formatVND } from 'utils';
 
 interface Props {
-	showtime?: Showtime;
+	showtime: Showtime;
 	price: number;
 	seats: number[];
 }

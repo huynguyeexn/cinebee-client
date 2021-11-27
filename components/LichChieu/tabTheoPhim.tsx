@@ -58,7 +58,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 								variant="primary"
 								block
 								className="mt-2"
-								onClick={() => router.push(`/dat-lich/${time}`)}
+								onClick={() => router.push(`/chon-ghe/${time}`)}
 							>
 								{time ? 'Đặt vé' : 'Hãy chọn xuất chiếu'}
 							</Button>

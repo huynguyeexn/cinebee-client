@@ -4,45 +4,30 @@ import { Info } from 'components/ThanhToan/info';
 import { Showtime } from 'interfaces';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import {
-	Card,
-	Col,
-	Container,
-	Form,
-	Image,
-	ListGroup,
-	ListGroupItem,
-	Modal,
-	Row,
-	Spinner,
-} from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 
 interface Props {}
 
-const ThanhToanPage1 = (props: Props) => {
-	const router = useRouter();
-	const { id } = router.query;
-	const { price } = router.query;
-	const { seat } = router.query;
-
+const ThanhToanPage = (props: Props) => {
+	const { showtime_id, seats, price } =
+		typeof window !== 'undefined' && JSON.parse(window.sessionStorage.getItem('orderTemp') || '{}');
 	const [showtime, setShowtime] = useState<Showtime>();
-	const [seatSelected, setSeatSelected] = useState<number[]>([]);
 	const [movieLoading, setMovieLoading] = React.useState(false);
 
 	useEffect(() => {
-		if (id) {
+		if (showtime_id) {
 			(async () => {
 				setMovieLoading(true);
 				try {
-					const response = await showtimesApi.getShowtimeById(Number(id));
-					setShowtime(response as unknown as Showtime);
+					const response: Showtime = await showtimesApi.getShowtimeById(Number(showtime_id));
+					setShowtime(response);
 				} catch (error) {
 					console.error('Failed to get showtime: ', error);
 				}
 				setMovieLoading(false);
 			})();
 		}
-	}, [id]);
+	}, [showtime_id]);
 
 	return (
 		<section
@@ -55,12 +40,12 @@ const ThanhToanPage1 = (props: Props) => {
 			) : (
 				showtime &&
 				price &&
-				seat && (
+				seats && (
 					<>
 						<div>
 							<Container className="py-4 w-75">
-								<CountExpire showtime={showtime} price={price} seat={seat} />
-								<Info showtime={showtime} price={price} seat={seats} />
+								<CountExpire showtime={showtime} price={price} seats={seats} />
+								<Info showtime={showtime} price={price} seats={seats} />
 							</Container>
 						</div>
 					</>
@@ -70,4 +55,4 @@ const ThanhToanPage1 = (props: Props) => {
 	);
 };
 
-export default ThanhToanPage1;
+export default ThanhToanPage;

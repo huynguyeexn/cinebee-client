@@ -1,0 +1,282 @@
+.payment {
+    &--countexpire {
+        height: 30vh;
+        border-radius: 10px;
+    }
+
+    &--countdown {
+        height: 80%;
+        width: 80%;
+        margin: auto auto;
+    }
+    &--info-card {
+        border: none;
+        background-color: #202020;
+        border: none;
+        .info {
+            span {
+                font-size: 31px;
+                color: #ffee32;
+                font-weight: 600;
+            }
+            .item {
+                // border: 1px solid #ffee32;
+                border: 1px solid #39393a;
+                background-color: #1a191f;
+                p {
+                    color: #ffee32;
+                }
+            }
+            .combo, .ticket {
+                width: 20%;
+            }
+        }
+    }
+
+    &--time {
+        width: 80%;
+        height: 60%;
+        background-color: #202020;
+        border: none;
+        padding-left: 10px;
+        .card-header {
+            span {
+                font-size: 18px;
+            }
+            color: #ffee32;
+            background-color: #202020;
+            border: none;
+        }
+    }
+
+    &--content {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #303030;
+        border-radius: 10px;
+    }
+    &--info {
+        width: 80%;
+        margin: 0 auto;
+        .user {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #39393a;
+            background-color: #1a191f;
+            span {
+                color: #ffee32;
+                font-size: 17px;
+            }
+        }
+        .movie {
+            .img {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .info {
+                span {
+                    font-size: 19px;
+                    font-weight: 400;
+                    color: rgba(255, 255, 255, 0.6);
+                }
+                p {
+                    color: white;
+                    font-weight: 300;
+                }
+                h6 {
+                    font-weight: 300;
+                    color: #ffee32;
+                }
+            }
+        }
+        .choose {
+            width: 100%;
+            .name {
+                width: 15%;
+            }
+            .list-group-item {
+                .card {
+                    border: none;
+                }
+                background-color: #1a191f;
+            }
+        }
+        .total {
+            .list-group-item {
+                border: 1px solid #303030;
+            }
+            button {
+                height: 45px;
+                border: 1px solid #ffee32;
+                background: none;
+                color: #ffee32;
+                border-radius: 10px;
+            }
+            input {
+                height: 45px;
+                border: 1px solid #ffee32;
+                background-color: #ffee32;
+                border-radius: 5px;
+                font-size: 18px;
+            }
+            .card {
+                background-color: #303030;
+                border: 1px solid #303030;
+            }
+            h5 {
+                font-weight: 300;
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 18px;
+            }
+            span {
+                font-size: 19px;
+            }
+            .tong {
+                color: #ffee32;
+            }
+        }
+    }
+    &--modal {
+        margin-top: 200px;
+        .use {
+            height: 40px;
+            border: 1px solid #ffee32;
+            background-color: #ffee32;
+            border-radius: 5px;
+            font-size: 17px;
+        }
+        .discount {
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+            box-shadow: none;
+            border: 1px solid #303030;
+            margin-bottom: 5px;
+        }
+        h4 {
+            color: #ffee32;
+        }
+    }
+
+    @media (max-width: 1025px) {
+		&--countdown {
+            h2 {
+                font-size: 2rem;
+            }
+            h1 {
+                font-size: 2.4rem;
+            }
+        }
+        
+        &--info-card {
+            .info {
+                span {
+                    font-size: 19px;
+                }
+                .combo, .ticket {
+                    width: auto;
+                }
+                h3 {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+        
+        &--time {
+            .card-header {
+                span {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        &--countexpire {
+            height: 22vh;
+        }
+        &--info {
+            .total {
+                .col-lg-5 {
+                    flex: 0 0 48.666667%;
+                    max-width: 48.666667%;
+                }
+            }
+        }
+    
+	}
+
+    @media (max-width: 770px) {
+		&--countdown {
+            h2 {
+                font-size: 2rem;
+            }
+            h1 {
+                font-size: 2.4rem;
+            }
+        }
+        
+        &--info-card {
+            .info {
+                span {
+                    font-size: 19px;
+                }
+                .combo, .ticket {
+                    width: auto;
+                }
+                h3 {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+        
+        &--time {
+            margin-top: 0px!important;
+            align-items: center;
+            padding-top: 0px !important;
+        }
+
+        &--body {
+            margin-top: 8.5rem !important;
+        }
+
+        &--countexpire {
+            height: 22vh;
+        }
+        &--info {
+            .total {
+                .col-lg-5 {
+                    flex: 0 0 62.666667%;
+                    max-width: 62.666667%;
+                }
+            }
+            .choose .name {
+                width: 20%;
+            }
+            .movie {
+                .img {
+                    padding: 0;
+                }
+                .info {
+                    font-size: 14px;
+                    
+                    span { 
+                        font-size: 16px;
+                    }
+
+                    h6 {
+                        font-size: 0.7rem;
+                    }
+
+                    h3 {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+        }
+    
+	}
+}

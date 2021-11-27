@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
-import { formatDateWithDay, formatVND } from 'utils';
+import { formatDateWithDay, formatVND, getRandomInt } from 'utils';
 
 interface Props {}
 
@@ -42,11 +42,22 @@ const DatLichPage = (props: Props) => {
 	};
 
 	const handleDatVe = () => {
-		router.push(`/thanh-toan?showtime=${id}&seats=${seatSelected}`);
+		const orderCodeTemp: number = Number(`${getRandomInt(100, 999)}${Date.now()}`);
+
+		const payload = {
+			order_code: orderCodeTemp,
+			showtime_id: id,
+			seats: seatSelected,
+			price: (showtime?.room.price || 75000) * seatSelected.length,
+		};
+
+		window.sessionStorage.setItem('orderTemp', JSON.stringify(payload));
+
+		router.push(`/don-hang`);
 	};
 
 	return (
-		<Container fluid className="dat-lich-page">
+		<Container fluid className="chon-ghe-page">
 			<Row>
 				<Col md={8}>
 					{showtime && (
