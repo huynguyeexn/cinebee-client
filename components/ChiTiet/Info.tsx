@@ -19,8 +19,8 @@ export const Info = ({ movie }: Props) => {
 						<Col key={movie?.id} xs={12} className="movie-detail--poster">
 							<div className="movie-detail--thumb">
 								<Image
-									loader={() => movie?.posters_full[0].url || ''}
-									src={movie.posters_full[0]?.url || ''}
+									loader={() => movie?.posters_full[0].url || '/assets/images/image-not-found.svg'}
+									src={movie.posters_full[0]?.url || '/assets/images/image-not-found.svg'}
 									alt=""
 									layout="fill"
 									objectFit="cover"
