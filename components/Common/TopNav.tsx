@@ -67,6 +67,9 @@ export const TopNav = (props: Props) => {
 							<NavDropdown.Item href="#action/3.3">Đạo diễn</NavDropdown.Item>
 							<NavDropdown.Item href="#action/3.3">Tin điện ảnh</NavDropdown.Item>
 						</NavDropdown>
+						<Link href="/bai-viet" passHref>
+							<Nav.Link href="#pricing">Bài viết</Nav.Link>
+						</Link>
 					</Nav>
 					<Nav>
 						{profile ? (

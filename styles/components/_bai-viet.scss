@@ -1,0 +1,135 @@
+@mixin max($width) {
+	@media screen and (max-width: $width + px) {
+		@content;
+	}
+}
+.List_blog{
+    margin-bottom: 40px;
+    min-height: 250px;
+    .image{
+        height: 230px;
+        padding: 0;
+        margin-right: 10px;
+        overflow: hidden;
+        border-radius: 20px;
+        @include max(480){
+            margin-right: 0;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+        img{
+            width: 100%;
+            height:100%;
+            
+            object-fit: cover;
+        }
+    }
+    .content{
+        width: calc(50% - 10px)!important;
+        &_category{
+            font-size: 16px;
+            font-weight: bold;
+        }
+        &_title{
+            &__date{
+                font-size: 14px;
+                color: #ccc;
+            }
+            cursor: pointer;
+            font-weight: bold;
+            a{
+                color: white;
+                text-decoration: none;
+            }
+        }
+        .userWrite{
+            margin-left: 0px;
+            margin-right: 0px;
+            &_Img{
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+            }
+            .author{
+                margin-left: 10px;
+                &_name{
+                    font-size: 16px;
+                    font-weight: bold;
+                    display:block;
+                }
+                &_total{
+                    font-size: 14px;
+                    color: #ccc;
+                    display:block;
+                }
+            }
+        }
+    }
+}
+.Blog_detail{
+    margin-top: 150px;
+    .profile{
+        text-align: center;
+        &_avatar{
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        &_name{
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 2px;
+            margin-top: 10px;
+        }
+        &_dateSend{
+            font-size: 14px;
+            color: #ccc;
+        }
+    }
+}
+.blog{
+    &_title{
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    &_summary{
+        text-align: center;
+        font-size: 18px;
+        color: #ccc;
+    }
+}
+.page-item{
+    .page-link {
+        
+        color: #f79918;
+        background-color: rgba(247, 153, 24, 0.1);
+        font-weight: bold;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        text-align: center;
+        border-top-right-radius: 50%!important;
+        border-bottom-right-radius: 50%!important;
+        &:hover {
+            z-index: 2;
+            color: white;
+            text-decoration: none;
+            background-color: orange!important;
+        }
+    }
+   
+}
+.active .page-link{
+        background-color: orange!important;
+        font-weight: bold;
+        color: white;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        text-align: center;
+        border-top-left-radius: 50%!important;
+    border-bottom-left-radius: 50%!important;
+}

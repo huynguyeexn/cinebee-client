@@ -8,3 +8,4 @@ export * from './genre';
 export * from './showtime';
 export * from './room';
 export * from './seat';
+export * from './blog';
