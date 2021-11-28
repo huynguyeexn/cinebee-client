@@ -60,6 +60,13 @@
 			&.selected {
 				background-color: $primary;
 			}
+
+			&.invalid {
+				border: 2px solid #ff0000;
+				background-color: transparent;
+				color: #fff;
+				cursor: not-allowed;
+			}
 		}
 
 		// .room-card {

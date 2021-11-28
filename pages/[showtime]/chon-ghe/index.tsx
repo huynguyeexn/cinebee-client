@@ -13,7 +13,8 @@ interface Props {}
 
 const DatLichPage = (props: Props) => {
 	const router = useRouter();
-	const { id } = router.query;
+	const { showtime: id } = router.query;
+
 
 	const [showtime, setShowtime] = useState<Showtime>();
 	const [seatSelected, setSeatSelected] = useState<number[]>([]);
@@ -42,18 +43,8 @@ const DatLichPage = (props: Props) => {
 	};
 
 	const handleDatVe = () => {
-		const orderCodeTemp: number = Number(`${getRandomInt(100, 999)}${Date.now()}`);
-
-		const payload = {
-			order_code: orderCodeTemp,
-			showtime_id: id,
-			seats: seatSelected,
-			price: (showtime?.room.price || 75000) * seatSelected.length,
-		};
-
-		window.sessionStorage.setItem('orderTemp', JSON.stringify(payload));
-
-		router.push(`/don-hang`);
+		window.sessionStorage.setItem('seatSelected', JSON.stringify(seatSelected));
+		router.push(`/${id}/don-hang`);
 	};
 
 	return (
@@ -64,6 +55,7 @@ const DatLichPage = (props: Props) => {
 						<RoomShowcase
 							cols={showtime.room.cols}
 							room={showtime.room}
+							invalidSeats={showtime.invalidSeats}
 							seatSelected={seatSelected}
 							onSelectSeat={handleSeatSelect}
 						/>

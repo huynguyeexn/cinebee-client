@@ -7,6 +7,7 @@ export interface Showtime extends IBase {
 	start: string;
 	movie: Movie;
 	room: Room;
+	invalidSeats: number[];
 }
 
 export interface ShowTimeGroupDate {

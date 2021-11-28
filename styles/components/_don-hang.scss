@@ -11,7 +11,6 @@
     }
     &--info-card {
         border: none;
-        background-color: #202020;
         border: none;
         .info {
             span {
@@ -22,7 +21,6 @@
             .item {
                 // border: 1px solid #ffee32;
                 border: 1px solid #39393a;
-                background-color: #1a191f;
                 p {
                     color: #ffee32;
                 }
@@ -36,7 +34,6 @@
     &--time {
         width: 80%;
         height: 60%;
-        background-color: #202020;
         border: none;
         padding-left: 10px;
         .card-header {
@@ -44,7 +41,6 @@
                 font-size: 18px;
             }
             color: #ffee32;
-            background-color: #202020;
             border: none;
         }
     }
@@ -109,20 +105,6 @@
         .total {
             .list-group-item {
                 border: 1px solid #303030;
-            }
-            button {
-                height: 45px;
-                border: 1px solid #ffee32;
-                background: none;
-                color: #ffee32;
-                border-radius: 10px;
-            }
-            input {
-                height: 45px;
-                border: 1px solid #ffee32;
-                background-color: #ffee32;
-                border-radius: 5px;
-                font-size: 18px;
             }
             .card {
                 background-color: #303030;

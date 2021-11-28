@@ -7,11 +7,11 @@ import { formatVND } from 'utils';
 
 interface Props {
 	showtime: Showtime;
-	price: number;
 	seats: number[];
 }
 
-export const CountExpire = ({ showtime, price, seats }: Props) => {
+export const CountExpire = ({ showtime, seats }: Props) => {
+	const price = showtime.room.price;
 	return (
 		<Row className="payment--countexpire">
 			<Row className="payment--countdown">

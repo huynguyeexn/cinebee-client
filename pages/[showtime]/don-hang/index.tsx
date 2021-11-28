@@ -1,25 +1,37 @@
 import { showtimesApi } from 'api-client/showtimeApi';
 import { CountExpire } from 'components/ThanhToan/countExpire';
 import { Info } from 'components/ThanhToan/info';
-import { Showtime } from 'interfaces';
+import { Order, Showtime } from 'interfaces';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
 
-interface Props {}
-
-const ThanhToanPage = (props: Props) => {
-	const { showtime_id, seats, price } =
-		typeof window !== 'undefined' && JSON.parse(window.sessionStorage.getItem('orderTemp') || '{}');
+const ThanhToanPage = () => {
+	const router = useRouter();
+	const { showtime: id } = router.query;
 	const [showtime, setShowtime] = useState<Showtime>();
 	const [movieLoading, setMovieLoading] = React.useState(false);
 
+	//
+	const seats =
+		typeof window !== 'undefined' &&
+		JSON.parse(window.sessionStorage.getItem('seatSelected') || '[]');
+	const { id: order_code }: Order =
+		typeof window !== 'undefined' && JSON.parse(window.sessionStorage.getItem('order') || '{}');
+
+	if(typeof window !== 'undefined') {
+		if(!seats.length ) {
+			router.push('/');
+			window.sessionStorage.clear();
+		}
+	}
+
 	useEffect(() => {
-		if (showtime_id) {
+		if (id) {
 			(async () => {
 				setMovieLoading(true);
 				try {
-					const response: Showtime = await showtimesApi.getShowtimeById(Number(showtime_id));
+					const response: Showtime = await showtimesApi.getShowtimeById(Number(id));
 					setShowtime(response);
 				} catch (error) {
 					console.error('Failed to get showtime: ', error);
@@ -27,7 +39,7 @@ const ThanhToanPage = (props: Props) => {
 				setMovieLoading(false);
 			})();
 		}
-	}, [showtime_id]);
+	}, [id]);
 
 	return (
 		<section
@@ -38,21 +50,23 @@ const ThanhToanPage = (props: Props) => {
 			{movieLoading ? (
 				<Spinner animation="border" variant="primary" />
 			) : (
-				showtime &&
-				price &&
-				seats && (
-					<>
-						<div>
-							<Container className="py-4 w-75">
-								<CountExpire showtime={showtime} price={price} seats={seats} />
-								<Info showtime={showtime} price={price} seats={seats} />
-							</Container>
-						</div>
-					</>
+				seats.length &&
+				showtime && (
+					<div>
+						<Container className="py-4 w-75">
+							<CountExpire showtime={showtime} seats={seats} />
+							<Info showtime={showtime} seats={seats} />
+						</Container>
+					</div>
 				)
 			)}
 		</section>
 	);
 };
 
+export async function getServerSideProps() {
+	return {
+		props: {},
+	};
+}
 export default ThanhToanPage;

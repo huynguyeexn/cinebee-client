@@ -3,9 +3,9 @@ import axiosClient from './axiosClient';
 const endpoint = '/payments';
 
 export interface PaymentPayload {
-	amount: string;
+	amount: number;
 	bank_code: string;
-	order_code: string;
+	order_code: number;
 }
 
 export const paymentApi = {

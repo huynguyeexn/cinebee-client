@@ -19,3 +19,12 @@ export interface Movie extends IBase {
 	directors_full?: Director[];
 	genres_full?: Genre[];
 }
+
+export interface MovieTickets extends IBase {
+	get_at?: string,
+	price: number,
+	order_id: number,
+	seat_id: number,
+	room_name: string,
+	seat_name: string
+}

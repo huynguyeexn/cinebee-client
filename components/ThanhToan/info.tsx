@@ -8,11 +8,10 @@ import { User } from './user';
 
 interface Props {
 	showtime: Showtime;
-	price: number;
 	seats: number[];
 }
 
-export const Info = ({ showtime, price, seats }: Props) => {
+export const Info = ({ showtime, seats }: Props) => {
 	return (
 		<Row className="mt-4 payment--body">
 			<Row className="payment--content pb-5">
@@ -20,7 +19,7 @@ export const Info = ({ showtime, price, seats }: Props) => {
 					<User />
 					<Movies showtime={showtime} />
 					<Choose showtime={showtime} seats={seats} />
-					<Total price={price} seats={seats} />
+					<Total showtime={showtime} seats={seats} />
 				</Row>
 			</Row>
 		</Row>
