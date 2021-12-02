@@ -1,5 +1,7 @@
 .showtime-page {
 	.list-group {
+		max-height: 70vh;
+		overflow-y: auto;
 		.list-group-item {
 			cursor: pointer;
 			&:hover {

@@ -1,4 +1,4 @@
-.dat-lich-page {
+.chon-ghe-page {
 	.row {
 		padding: 1rem 0.5rem;
 	}
@@ -59,6 +59,13 @@
 
 			&.selected {
 				background-color: $primary;
+			}
+
+			&.invalid {
+				border: 2px solid #ff0000;
+				background-color: transparent;
+				color: #fff;
+				cursor: not-allowed;
 			}
 		}
 

@@ -16,7 +16,7 @@ export const showtimesApi = {
 	getShowtimesByMovie: (id: number) => {
 		return axiosClient.get(endpoint + `/movie/${id}`);
 	},
-	getShowtimeById: (id: number) => {
+	getShowtimeById: (id: number): Promise<Showtime> => {
 		return axiosClient.get(endpoint + `/${id}`);
 	},
 };

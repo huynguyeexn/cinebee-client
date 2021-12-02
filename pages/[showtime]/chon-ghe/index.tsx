@@ -7,13 +7,14 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
-import { formatDateWithDay, formatVND } from 'utils';
+import { formatDateWithDay, formatVND, getRandomInt } from 'utils';
 
 interface Props {}
 
 const DatLichPage = (props: Props) => {
 	const router = useRouter();
-	const { id } = router.query;
+	const { showtime: id } = router.query;
+
 
 	const [showtime, setShowtime] = useState<Showtime>();
 	const [seatSelected, setSeatSelected] = useState<number[]>([]);
@@ -41,14 +42,20 @@ const DatLichPage = (props: Props) => {
 		setSeatSelected([]);
 	};
 
+	const handleDatVe = () => {
+		window.sessionStorage.setItem('seatSelected', JSON.stringify(seatSelected));
+		router.push(`/${id}/don-hang`);
+	};
+
 	return (
-		<Container fluid className="dat-lich-page">
+		<Container fluid className="chon-ghe-page">
 			<Row>
 				<Col md={8}>
 					{showtime && (
 						<RoomShowcase
 							cols={showtime.room.cols}
 							room={showtime.room}
+							invalidSeats={showtime.invalidSeats}
 							seatSelected={seatSelected}
 							onSelectSeat={handleSeatSelect}
 						/>
@@ -102,7 +109,11 @@ const DatLichPage = (props: Props) => {
 							>
 								Chọn lại
 							</Button>{' '}
-							<Button variant="primary" disabled={!seatSelected.length}>
+							<Button
+								variant="primary"
+								disabled={!seatSelected.length}
+								onClick={() => handleDatVe()}
+							>
 								Đặt vé
 							</Button>
 						</Card.Body>

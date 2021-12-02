@@ -38,3 +38,9 @@ export interface ImageUpload extends UploadFile<any> {
 	alt: string;
 	folder: string;
 }
+
+
+export interface ResponseData<T> {
+	message: string;
+	data: T;
+}

@@ -21,3 +21,9 @@ export const formatVND = (number?: number): string => {
 	if (!number || number <= 0) return '0 đ';
 	return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
 };
+
+export const getRandomInt = (min: number, max: number): number => {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
