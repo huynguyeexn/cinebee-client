@@ -11,4 +11,5 @@ export interface Order extends IBase {
     movieTickets: MovieTickets[];
     payments: any[];
     showtime: Showtime;
+    verify_code: string;
 }

@@ -1,9 +1,9 @@
 import { Showtime } from 'interfaces';
+import moment from 'moment';
 import React from 'react';
 import { Card, Col, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
-import moment from 'moment';
-import { GiSeaStar } from 'react-icons/gi';
-import { formatVND } from 'utils';
+import { formatVND, getSession } from 'utils';
+import TimeoutBox from './timeoutBox';
 
 interface Props {
 	showtime: Showtime;
@@ -12,10 +12,14 @@ interface Props {
 
 export const CountExpire = ({ showtime, seats }: Props) => {
 	const price = showtime.room.price;
+
+	const order = getSession('order');
+	const timeout = moment(order.booking_at as string).add(5, 'minutes').toJSON();
+
 	return (
 		<Row className="payment--countexpire">
 			<Row className="payment--countdown">
-				<Col lg={9} className="pr-0">
+				<Col lg={12} className="pr-0">
 					<p className="mb-0">TÊN PHIM</p>
 					<h2 className="mt-0">{showtime?.movie.name}</h2>
 					<Card className="payment--info-card">
@@ -42,17 +46,13 @@ export const CountExpire = ({ showtime, seats }: Props) => {
 									<span>{formatVND(price * seats.length)}</span>
 								</p>
 							</ListGroupItem>
+							<ListGroupItem className="item pt-3 pl-3">
+								<h6 className="mb-0">Thời gian giữ ghế</h6>
+								<p className="mb-0">
+									<TimeoutBox timeout={timeout}/>
+								</p>
+							</ListGroupItem>
 						</ListGroup>
-					</Card>
-				</Col>
-				<Col lg={3} className="d-flex align-items-center pl-1">
-					<Card className="payment--time pb-3 pt-4 mt-4 w-100">
-						<Card.Header className="p-0">
-							<span>Thời gian giữ ghế</span>
-						</Card.Header>
-						<Card.Body className="p-0">
-							<h1 className="m-0">00:00</h1>
-						</Card.Body>
 					</Card>
 				</Col>
 			</Row>

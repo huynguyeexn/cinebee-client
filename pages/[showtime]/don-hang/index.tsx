@@ -1,29 +1,23 @@
 import { showtimesApi } from 'api-client/showtimeApi';
 import { CountExpire } from 'components/ThanhToan/countExpire';
 import { Info } from 'components/ThanhToan/info';
+import { useAuth } from 'hooks';
 import { Order, Showtime } from 'interfaces';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
+import { getSession } from 'utils';
 
 const ThanhToanPage = () => {
 	const router = useRouter();
+	const { profile } = useAuth();
 	const { showtime: id } = router.query;
 	const [showtime, setShowtime] = useState<Showtime>();
 	const [movieLoading, setMovieLoading] = React.useState(false);
+	const [seats, setSeats] = useState<number[]>(getSession('seats'));
 
-	//
-	const seats =
-		typeof window !== 'undefined' &&
-		JSON.parse(window.sessionStorage.getItem('seatSelected') || '[]');
-	const { id: order_code }: Order =
-		typeof window !== 'undefined' && JSON.parse(window.sessionStorage.getItem('order') || '{}');
-
-	if(typeof window !== 'undefined') {
-		if(!seats.length ) {
-			router.push('/');
-			window.sessionStorage.clear();
-		}
+	if (!profile) {
+		typeof window !== 'undefined' && router.push('/');
 	}
 
 	useEffect(() => {
@@ -50,6 +44,7 @@ const ThanhToanPage = () => {
 			{movieLoading ? (
 				<Spinner animation="border" variant="primary" />
 			) : (
+				seats &&
 				seats.length &&
 				showtime && (
 					<div>

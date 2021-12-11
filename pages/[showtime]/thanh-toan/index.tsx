@@ -1,5 +1,6 @@
 import { paymentApi, PaymentPayload } from 'api-client/payment';
 import { VNPAY_BANK_LIST } from 'constant/vnpay';
+import { useAuth } from 'hooks';
 import { Order } from 'interfaces';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -18,11 +19,18 @@ import { formatVND } from 'utils';
 
 const ThanhToanChiTietPage = () => {
 	const router = useRouter();
+	const { profile } = useAuth();
 	const { id: order_code, total: price }: Order =
 		typeof window !== 'undefined' && JSON.parse(window.sessionStorage.getItem('order') || '{}');
 	const [bankSelected, setBankSelected] = useState<string | undefined>();
 	const [searchBank, setSearchBank] = useState('');
 	const [bankList, setBankList] = useState(VNPAY_BANK_LIST);
+
+	if (typeof window !== 'undefined') {
+		if (!profile) {
+			router.push('/');
+		}
+	}
 
 	useEffect(() => {
 		if (!order_code || !price) {
@@ -126,6 +134,8 @@ const ThanhToanChiTietPage = () => {
 								</Card.Header>
 								<Card.Body>
 									<Row className="px-1">
+										<p className="w-100 mb-1">Ngân hàng </p>
+										<h5 className="mt-0">{bankSelected ?VNPAY_BANK_LIST.find((x) => x.code === bankSelected)?.name : 'Vui lòng chọn ngân hàng'}</h5>
 										<p className="w-100 mb-1">Đơn vị chấp nhận thanh toán </p>
 										<h5 className="mt-0">Cinebee</h5>
 										<br />
