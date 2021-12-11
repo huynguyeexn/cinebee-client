@@ -1,13 +1,18 @@
 import { orderApi } from 'api-client';
-import { VNPAY_ERROR_CODE } from 'constant/vnpay';
+import { VNPAY_ERROR_CODE, VNPAY_ERROR_LIST } from 'constant/vnpay';
+import { Order, ResponseData } from 'interfaces';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { Alert, Button, Container } from 'react-bootstrap';
+import { clearSession, ToastError } from 'utils';
+
+import QRImage from 'qrcode.react'
 
 interface Props {}
 
 const VNPayCallbackPage = (props: Props) => {
 	const router = useRouter();
+	const [verifyCode, setVerifyCode] = React.useState('');
 	const {
 		// vnp_Amount: amount,
 		// vnp_BankCode: bankCode,
@@ -25,14 +30,24 @@ const VNPayCallbackPage = (props: Props) => {
 	const status = VNPAY_ERROR_CODE.find((item) => item.code === responseCode);
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			window.sessionStorage.clear();
-			if (status?.code === '00') {
-				orderApi.confirmOrder(Number(order_id));
-			}
+		if (responseCode === '00') {
+			(async () => {
+					try {
+					const response: ResponseData<Order>  = await orderApi.confirmOrder(Number(order_id));
+					setVerifyCode(response.data.verify_code);
+				} catch (error) {
+					ToastError("Đã xảy ra lỗi trong quá trình xử lý");
+					console.log('Error: confirmOrder', error);
+				}
+			})()
+		} else if (responseCode && VNPAY_ERROR_LIST.includes(responseCode as string)) {
+			try {
+				orderApi.cancelOrder(Number(order_id));
+			} catch (error) {}
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+		clearSession();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [responseCode]);
 
 	return (
 		<Container className="mt-5">
@@ -42,6 +57,7 @@ const VNPayCallbackPage = (props: Props) => {
 					{status?.message || 'Không xác định'}
 				</Alert>
 			)}
+			{verifyCode && <QRImage value={verifyCode} />}
 			<Button onClick={() => router.push('/')}>Quay về</Button>
 		</Container>
 	);
