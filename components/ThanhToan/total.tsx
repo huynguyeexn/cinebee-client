@@ -2,8 +2,8 @@ import { OrderPayload, orderApi } from 'api-client';
 import { Order, Showtime } from 'interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Button, Card, Col, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
-import { formatVND } from 'utils';
+import { Button, Card, Col, ListGroup, ListGroupItem, Modal, Row } from 'react-bootstrap';
+import { clearSession, formatVND, getSession } from 'utils';
 
 interface Props {
 	showtime: Showtime;
@@ -13,6 +13,8 @@ interface Props {
 export const Total = ({ showtime, seats }: Props) => {
 	const router = useRouter();
 	const price = showtime.room.price;
+
+	const [isConfirmCancel, setIsConfirmCancel] = React.useState(false);
 
 	// TODO: Voucher
 	// const [discount, setDiscount] = React.useState('0');
@@ -48,9 +50,12 @@ export const Total = ({ showtime, seats }: Props) => {
 		}
 	};
 
-	const handleCancelClick = () => {
-		window.sessionStorage.clear();
-		router.push('/');
+	const handleCancelOrder = async () => {
+		const { id }: Order = getSession('order');
+
+		await orderApi.cancelOrder(id as number);
+		clearSession();
+		router.push('/lich-chieu');
 	};
 
 	return (
@@ -92,11 +97,30 @@ export const Total = ({ showtime, seats }: Props) => {
 						</ListGroup> */}
 
 						<ListGroup className="d-flex flex-row justify-content-end">
-							<Button variant="outline-primary" className="mr-2" onClick={handleCancelClick}>Hủy bỏ</Button>
-							<Button onClick={handleThanhToanClick} variant="primary">Thanh toán</Button>
+							<Button variant="outline-primary" className="mr-2" onClick={() => setIsConfirmCancel(true)}>
+								Hủy bỏ
+							</Button>
+							<Button onClick={handleThanhToanClick} variant="primary">
+								Thanh toán
+							</Button>
 						</ListGroup>
 					</Card>
 				</Col>
+
+				<Modal show={isConfirmCancel} onHide={() => setIsConfirmCancel(false)}>
+					<Modal.Header closeButton>
+						<Modal.Title>Xác nhận hủy bỏ</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>Bạn có chắc chắn là hủy bỏ đơn hàng này</Modal.Body>
+					<Modal.Footer>
+						<Button variant="success" onClick={() => setIsConfirmCancel(false)}>
+							Đóng
+						</Button>
+						<Button variant="outline-danger" onClick={handleCancelOrder}>
+							Hủy đơn hàng
+						</Button>
+					</Modal.Footer>
+				</Modal>
 
 				{/* TODO: Voucher */}
 				{/* <Modal show={isOpenModal} className="payment--modal">
