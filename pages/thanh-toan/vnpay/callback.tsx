@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { Alert, Button, Container } from 'react-bootstrap';
 import { clearSession, ToastError } from 'utils';
 
-import QRImage from 'react-qr-image'
+import QRImage from 'qrcode.react'
 
 interface Props {}
 
@@ -57,7 +57,7 @@ const VNPayCallbackPage = (props: Props) => {
 					{status?.message || 'Không xác định'}
 				</Alert>
 			)}
-			{verifyCode && <QRImage text={verifyCode} />}
+			{verifyCode && <QRImage value={verifyCode} />}
 			<Button onClick={() => router.push('/')}>Quay về</Button>
 		</Container>
 	);

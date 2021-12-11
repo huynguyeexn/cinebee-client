@@ -7,11 +7,13 @@ import { FaUser } from 'react-icons/fa';
 import { MdDateRange, MdEmail } from 'react-icons/md';
 import { IoMdHome, IoMdMale, IoMdFemale, IoMdPhonePortrait } from 'react-icons/io';
 import { GENDER } from 'constant';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
 const ProfilePage = (props: Props) => {
 	const { profile } = useAuth();
+	const router = useRouter();
 
 	if (typeof window !== 'undefined' && !profile) {
 		router.push('/');
