@@ -6,15 +6,14 @@ import { GiSeaStar } from 'react-icons/gi';
 import { formatVND } from 'utils';
 
 interface Props {
-	showtime: Showtime;
+	showtime?: Showtime;
 	seats: number[];
 }
 
 export const CountExpire = ({ showtime, seats }: Props) => {
-	const price = showtime.room.price;
 	return (
 		<Row className="payment--countexpire">
-			<Row className="payment--countdown">
+			<Row className="payment--countdown pl-5">
 				<Col lg={9} className="pr-0">
 					<p className="mb-0">TÊN PHIM</p>
 					<h2 className="mt-0">{showtime?.movie.name}</h2>
@@ -27,26 +26,26 @@ export const CountExpire = ({ showtime, seats }: Props) => {
 							<ListGroupItem className="item pt-3 pl-3 ticket">
 								<h6 className="mb-0">Số Vé</h6>
 								<p className="mb-0">
-									<span>{seats.length}</span>
+									<span>{seats.length} </span>Vé
 								</p>
 							</ListGroupItem>
 							<ListGroupItem className="item pt-3 pl-3 combo">
 								<h6 className="mb-0">Combo</h6>
 								<p className="mb-0">
-									<span>0</span>
+									<span>0 </span>Combo
 								</p>
 							</ListGroupItem>
-							<ListGroupItem className="item pt-3 pl-3">
+							<ListGroupItem className="item pt-3 pl-3 total">
 								<h6 className="mb-0">Tổng Tiền</h6>
 								<p className="mb-0">
-									<span>{formatVND(price * seats.length)}</span>
+									<span>{formatVND((showtime?.room.price as number)*seats.length)}</span>
 								</p>
 							</ListGroupItem>
 						</ListGroup>
 					</Card>
 				</Col>
 				<Col lg={3} className="d-flex align-items-end pl-1">
-					<Card className="payment--time pb-2 pt-2 mb-1 w-100">
+					<Card className="payment--time pb-2 pt-2 w-100">
 						<Card.Header className="p-0">
 							<span>Thời gian giữ ghế</span>
 						</Card.Header>

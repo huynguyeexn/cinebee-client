@@ -1,6 +1,7 @@
 .payment {
     &--countexpire {
-        height: 30vh;
+        width: 100%;
+        min-height: 30vh;
         border-radius: 10px;
     }
 
@@ -28,12 +29,15 @@
             .combo, .ticket {
                 width: 20%;
             }
+            .total {
+                width: 40%;
+            }
         }
     }
 
     &--time {
         width: 80%;
-        height: 60%;
+        height: 55%;
         border: none;
         padding-left: 10px;
         .card-header {
@@ -42,6 +46,7 @@
             }
             color: #ffee32;
             border: none;
+            background-color: #303030;
         }
     }
 
@@ -259,6 +264,13 @@
                 }
             }
         }
-    
+        &--button{
+            button {
+                width: 125px;
+                height: 45px;
+                font-size: 19px;
+                font-weight: 500;
+            }
+        }
 	}
 }

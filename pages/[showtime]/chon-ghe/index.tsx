@@ -1,5 +1,6 @@
 import { showtimesApi } from 'api-client/showtimeApi';
 import { AxiosResponse } from 'axios';
+import { CountExpire } from 'components/DatLich/countExpire';
 import RoomShowcase from 'components/DatLich/RoomShowcase';
 import { Showtime } from 'interfaces';
 import moment from 'moment';
@@ -50,7 +51,10 @@ const DatLichPage = (props: Props) => {
 	return (
 		<Container fluid className="chon-ghe-page">
 			<Row>
-				<Col md={8}>
+				<CountExpire showtime={showtime} seats={seatSelected}/>
+			</Row>
+			<Row className='w-100 d-flex justify-content-center'>
+				<Col lg={10} className='pl-5'>
 					{showtime && (
 						<RoomShowcase
 							cols={showtime.room.cols}
@@ -61,7 +65,7 @@ const DatLichPage = (props: Props) => {
 						/>
 					)}
 				</Col>
-				<Col md={4}>
+				{/* <Col md={4}>
 					<Card>
 						<Card.Body>
 							<Card.Title>
@@ -118,6 +122,24 @@ const DatLichPage = (props: Props) => {
 							</Button>
 						</Card.Body>
 					</Card>
+				</Col> */}
+			</Row>
+			<Row className=' w-100 d-flex justify-content-center payment--button'>
+				<Col lg='2'>
+					<Button
+						variant="outline-light"
+						onClick={handleRechooseSeat}
+						disabled={!seatSelected.length}
+					>
+						Chọn lại
+					</Button>{' '}
+					<Button
+						variant="primary"
+						disabled={!seatSelected.length}
+						onClick={() => handleDatVe()}
+					>
+						Đặt vé
+					</Button>
 				</Col>
 			</Row>
 		</Container>
