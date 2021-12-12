@@ -3,7 +3,7 @@ import { VNPAY_ERROR_CODE, VNPAY_ERROR_LIST } from 'constant/vnpay';
 import { Order, ResponseData } from 'interfaces';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { Alert, Button, Container } from 'react-bootstrap';
+import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { clearSession, ToastError } from 'utils';
 
 import QRImage from 'qrcode.react'
@@ -51,14 +51,29 @@ const VNPayCallbackPage = (props: Props) => {
 
 	return (
 		<Container className="mt-5">
-			<h1>Kết quả thanh toán</h1>
+			<Row className='payment-success--header'>
+				<h1 className='mt-5'>Kết quả thanh toán</h1>
+				<Button onClick={() => router.push('/')}>Quay về</Button>
+			</Row>
 			{status && (
 				<Alert variant={status?.code === '00' ? 'success' : 'danger'}>
 					{status?.message || 'Không xác định'}
 				</Alert>
 			)}
-			{verifyCode && <QRImage value={verifyCode} />}
-			<Button onClick={() => router.push('/')}>Quay về</Button>
+			<Row className='payment-success--qr d-flex justify-content-center align-items-center'>
+				{verifyCode && <QRImage value={verifyCode} />}
+				<h4 className='mt-2'>AHDEKZBF</h4>
+			</Row>
+			<Row className='payment-success--info mt-5'>
+				<div className='w-100 d-flex'><div className='thongtin'>Mã đặt vé: </div> <span>291276</span></div>
+				<div className='w-100 d-flex'><div className='thongtin'>Rạp: </div> <span>CINEBEE</span></div>
+				<div className='w-100 d-flex'><div className='thongtin'>Thông tin phim: </div><span>ME CHONG</span></div>
+				<div className='w-100 d-flex'><div className='thongtin'>Suất chiếu: </div><span>21/09/2001</span></div>
+				<div className='w-100 d-flex'><div className='thongtin'>Thông tin vé:</div> <span>qwertyuiopasdfghjklzx</span></div>
+				<div className='w-100 d-flex'><div className='thongtin'>Đồ ăn và thức uống: <span></span></div></div>
+				<div className='w-100 d-flex'><div className='thongtin'>Tổng cộng: </div><span>45.000đ</span></div>
+			</Row>
+			
 		</Container>
 	);
 };

@@ -71,9 +71,9 @@ const DatLichPage = (props: Props) => {
 
 	return (
 		<Container fluid className="chon-ghe-page">
-			<Row>
+			{/* <Row>
 				<CountExpire showtime={showtime} seats={seatSelected}/>
-			</Row>
+			</Row> */}
 			<Row className='w-100 d-flex justify-content-center'>
 				<Col lg={10} className='pl-5'>
 					{showtime && (
