@@ -1,22 +1,26 @@
+import { orderApi, OrderPayload } from 'api-client';
 import { showtimesApi } from 'api-client/showtimeApi';
-import { AxiosResponse } from 'axios';
 import RoomShowcase from 'components/DatLich/RoomShowcase';
-import { Showtime } from 'interfaces';
+import { useAuth } from 'hooks';
+import { Order, Showtime } from 'interfaces';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
-import { formatDateWithDay, formatVND } from 'utils';
+import { formatDateWithDay, formatVND, getSession, removeSession, setSession } from 'utils';
 
 interface Props {}
 
 const DatLichPage = (props: Props) => {
 	const router = useRouter();
-	const { id } = router.query;
+	const { showtime: id } = router.query;
+
+	const { profile } = useAuth();
 
 	const [showtime, setShowtime] = useState<Showtime>();
 	const [seatSelected, setSeatSelected] = useState<number[]>([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		if (id === undefined) {
@@ -41,14 +45,39 @@ const DatLichPage = (props: Props) => {
 		setSeatSelected([]);
 	};
 
+	const handleDatVe = async () => {
+		if(!profile) {
+			return router.push('/dang-nhap');
+		}
+
+		const { id: order_code }: Order = getSession('order');
+		removeSession('order');
+
+		if (showtime) {
+			const payload: OrderPayload = {
+				showtime_id: showtime.id as number,
+				seats: seatSelected as number[],
+			};
+			setLoading(true);
+			const response = await orderApi.createOrder(payload);
+			const order: Order = response.data;
+			setSession('order', order);
+			setSession('seats', seatSelected);
+			setLoading(false);
+
+			router.push(`/${id}/don-hang`);
+		}
+	};
+
 	return (
-		<Container fluid className="dat-lich-page">
+		<Container fluid className="chon-ghe-page">
 			<Row>
 				<Col md={8}>
 					{showtime && (
 						<RoomShowcase
 							cols={showtime.room.cols}
 							room={showtime.room}
+							invalidSeats={showtime.invalidSeats}
 							seatSelected={seatSelected}
 							onSelectSeat={handleSeatSelect}
 						/>
@@ -102,9 +131,19 @@ const DatLichPage = (props: Props) => {
 							>
 								Chọn lại
 							</Button>{' '}
-							<Button variant="primary" disabled={!seatSelected.length}>
-								Đặt vé
-							</Button>
+							{profile ? (
+								<Button
+									variant="primary"
+									disabled={!seatSelected.length || loading}
+									onClick={() => handleDatVe()}
+								>
+									{loading ? 'Loading…' : 'Đặt vé'}
+								</Button>
+							) : (
+								<Button variant="primary" onClick={() => router.push('/accounts/login')}>
+									Đăng nhập
+								</Button>
+							)}
 						</Card.Body>
 					</Card>
 				</Col>

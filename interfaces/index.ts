@@ -9,3 +9,5 @@ export * from './showtime';
 export * from './room';
 export * from './seat';
 export * from './blog';
+export * from './order';
+// export * from './payment';

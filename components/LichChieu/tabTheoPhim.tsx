@@ -40,6 +40,12 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 		}
 	};
 
+	const handleDatVeClick = () => {
+		if (movie && date && time) {
+			router.push(`/[showtime]/chon-ghe`, `/${time}/chon-ghe`);
+		}
+	};
+
 	return (
 		<Tab.Pane eventKey={tabKey}>
 			<Row>
@@ -58,7 +64,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 								variant="primary"
 								block
 								className="mt-2"
-								onClick={() => router.push(`/dat-lich/${time}`)}
+								onClick={handleDatVeClick}
 							>
 								{time ? 'Đặt vé' : 'Hãy chọn xuất chiếu'}
 							</Button>

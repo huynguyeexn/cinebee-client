@@ -1,0 +1,36 @@
+.payment-detail {
+	&--content {
+		width: 100%;
+		min-height: 300px;
+		h5 {
+			color: #ffee32;
+		}
+		.img {
+			margin: 10px;
+			height: 60px;
+			overflow: hidden;
+			border: 1px solid #39393a;
+			background-color: white;
+			border-radius: 10px;
+			padding: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 5px solid transparent;
+			img {
+				width: 100%;
+			}
+
+			&.active,
+			&:hover {
+				border: 5px solid $primary;
+			}
+		}
+	}
+	&--payment {
+		p {
+			font-size: 19px;
+			color: #ffee32;
+		}
+	}
+}
