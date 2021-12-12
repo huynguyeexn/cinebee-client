@@ -8,7 +8,7 @@ const BaiVietPage = (props: Props) => {
 	
 	return (
 		<Container className="py-4">
-			<PageTitle title="Bài viết" moreLabel="Bài viết" moreUrl="/Blog" />
+			<PageTitle title="Bài viết" moreLabel="Bài viết" moreUrl="/bai-viet" />
 			<ListBlog />
 		</Container>
 	);

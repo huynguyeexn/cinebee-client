@@ -52,6 +52,7 @@
             }
             .author{
                 margin-left: 10px;
+                line-height: 50px;
                 &_name{
                     font-size: 16px;
                     font-weight: bold;
@@ -100,6 +101,18 @@
     }
 }
 .page-item{
+    &:first-child {
+        .page-link {
+            border-top-left-radius: 50%!important;
+            border-bottom-left-radius: 50%!important;
+        }
+    }
+    &:last-child {
+        .page-link {
+            border-top-left-radius: 50%!important;
+            border-bottom-left-radius: 50%!important;
+        }
+    }
     .page-link {
         
         color: #f79918;
@@ -131,5 +144,5 @@
         margin-right: 10px;
         text-align: center;
         border-top-left-radius: 50%!important;
-    border-bottom-left-radius: 50%!important;
+        border-bottom-left-radius: 50%!important;
 }
