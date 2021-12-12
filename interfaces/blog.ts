@@ -11,4 +11,5 @@ export interface Blog extends IBase {
     avatar: string;
     employee_id: number;
     total: string;
+    files: any;
 }

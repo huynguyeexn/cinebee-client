@@ -81,7 +81,9 @@ const BlogDetail = () => {
                     <Row className="List_blog mt-5" key={i}>
                          
                         <Col className="image" md={4}>
-                        <Image src={val.img ?? "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725184-stock-illustration-image-available-icon-flat-vector.jpg"} alt="error" />
+                        <Image src={val.files.length == 0 ? 
+                            "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725184-stock-illustration-image-available-icon-flat-vector.jpg"
+                            :val.files[0]?.url } alt="error" />
                         </Col>
                         <Col className="content">
                             <p className="content_category">{category && category.filter((e: any)=> e.id == val.category_id).map((val: any)=>(
