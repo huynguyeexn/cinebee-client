@@ -53,7 +53,7 @@ const VNPayCallbackPage = (props: Props) => {
 	}, [responseCode]);
 
 	return (
-		<Container className="mt-5 py-5">
+		<Container className="mt-5 py-5 mb-5">
 			<Card>
 				<Card.Body className="p-5">
 					<Row className="">

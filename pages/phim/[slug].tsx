@@ -31,7 +31,7 @@ const Movies = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
+	
 	return (
 		<section
 			className={`movie-detail ${

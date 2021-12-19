@@ -9,4 +9,5 @@ export * from './showtime';
 export * from './room';
 export * from './seat';
 export * from './order';
-// export * from './payment';
+export * from './category';
+export * from './customer';

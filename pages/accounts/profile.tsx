@@ -1,6 +1,6 @@
 import { PageTitle } from 'components';
 import { useAuth } from 'hooks';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Col, Container, Table, Nav, Row, Tab } from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa';
@@ -8,16 +8,40 @@ import { MdDateRange, MdEmail } from 'react-icons/md';
 import { IoMdHome, IoMdMale, IoMdFemale, IoMdPhonePortrait } from 'react-icons/io';
 import { GENDER } from 'constant';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Order } from 'interfaces';
+import { customerApi } from 'api-client/customerApi';
+import { formatDateWithDay, formatVND } from 'utils';
 
 interface Props {}
 
 const ProfilePage = (props: Props) => {
 	const { profile } = useAuth();
 	const router = useRouter();
+	const [order, setOrder] = useState<Order[]>([])
+	const [total, setTotal] = useState(0)
+	const [movieLoading, setMovieLoading] = React.useState(false);
 
 	if (typeof window !== 'undefined' && !profile) {
 		router.push('/');
 	}
+
+	React.useEffect(() => {
+		(async () => {
+			setMovieLoading(true);
+			try {
+				const orders = await customerApi.getAllOrderById(profile.id);
+				setOrder(orders.data as Order[]);
+				for (let index = 0; index < order.length; index++) {
+					setTotal(total + order[index].showtime.room.price)
+				}
+			} catch (error) {
+				console.error('Failed to get movies playing: ', error);
+			}
+			setMovieLoading(false);
+		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Container
@@ -136,28 +160,34 @@ const ProfilePage = (props: Props) => {
 										</div>
 									</div>
 								</Tab.Pane>
-								<Tab.Pane eventKey="second">
-									<Table striped bordered hover variant="dark">
+								<Tab.Pane eventKey="second" >
+									<h2 className='mt-3'>Lịch sử giao dịch</h2>
+									<Table striped bordered hover variant="dark" className='mt-4 giao-dich--table_giaodich'>
 										<thead>
 											<tr>
-												<th>#</th>
-												<th>First Name</th>
-												<th>Last Name</th>
-												<th>Username</th>
+												<th className='ngay'>Ngày</th>
+												<th className='movie'>Phim</th>
+												<th>Mã vé</th>
+												<th>Giá trị</th>
+												<th className='qr_code'>QR code</th>
 											</tr>
 										</thead>
 										<tbody>
+											{order && order.map((order,idx) => (
+												<tr key={idx}>
+													<td>{formatDateWithDay(order.booking_at)}</td>
+													<td className='movie'>{order.showtime.movie.name}</td>
+													<td>460388</td>
+													<td>{order.showtime.room.price}</td>
+													<td><Link href={`/accounts/${order.id}`}>Xem chi tiết</Link></td>
+												</tr>
+											))}
 											<tr>
-												<td>1</td>
-												<td>Mark</td>
-												<td>Otto</td>
-												<td>@mdo</td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>Jacob</td>
-												<td>Thornton</td>
-												<td>@fat</td>
+												<td className='text_total'>Tổng</td>
+												<td></td>
+												<td></td>
+												<td className='text_total'>{formatVND(total)}</td>
+												<td></td>
 											</tr>
 										</tbody>
 									</Table>
