@@ -34,7 +34,7 @@ export const TopNav = (props: Props) => {
 			<Container>
 				<Link href="/" passHref>
 					<Navbar.Brand className="h4 mb-0 logo-text">
-						<Image src={logo} alt="cinebee-logo" height={30} width={143.25}/>
+						<Image src={logo} alt="cinebee-logo" height={30} width={143.25} />
 					</Navbar.Brand>
 				</Link>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav">
@@ -54,7 +54,7 @@ export const TopNav = (props: Props) => {
 						<Link href="/sap-chieu" passHref>
 							<Nav.Link href="#pricing">Sắp chiếu</Nav.Link>
 						</Link>
-						<NavDropdown
+						{/* <NavDropdown
 							title={
 								<div className="d-flex align-items-center">
 									Góc điện ảnh <RiArrowDownSLine />
@@ -67,6 +67,11 @@ export const TopNav = (props: Props) => {
 							<NavDropdown.Item href="#action/3.3">Đạo diễn</NavDropdown.Item>
 							<NavDropdown.Item href="#action/3.3">Tin điện ảnh</NavDropdown.Item>
 						</NavDropdown>
+							 */}
+
+						<Link href="/tin-tuc" passHref>
+							<Nav.Link>Tin tức</Nav.Link>
+						</Link>
 					</Nav>
 					<Nav>
 						{profile ? (
