@@ -1,3 +1,4 @@
+import { ListParams } from 'interfaces';
 import moment from 'moment';
 import axiosClient from './axiosClient';
 
@@ -18,6 +19,10 @@ export const movieApi = {
 
 	getMovieByActors: (id: number) => {
 		return axiosClient.get(endpoint + `/${id}/actors`);
+	},
+
+	getMovieByComments: (id: string | string[], params: ListParams) => {
+		return axiosClient.get(endpoint + `/${id}/comments`, {params});
 	},
 
 	getMovie: () => {

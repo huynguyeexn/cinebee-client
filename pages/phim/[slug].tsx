@@ -1,28 +1,39 @@
 import { useRouter } from 'next/router';
-import { Card, Col, Container, Row, Spinner } from 'react-bootstrap';
+import { Button, Card, Col, Container, Modal, Row, Spinner } from 'react-bootstrap';
 import { RelatedMovies } from 'components/ChiTiet/RelatedMovies';
 import { BannerHeader } from 'components/ChiTiet/BannerHeader';
 import { Info } from 'components/ChiTiet/Info';
-import { Comment } from 'components/ChiTiet/Comment';
+import { Comments } from 'components/ChiTiet/Comment';
 import { Cast } from 'components/ChiTiet/Cast';
 import { Directors } from 'components/ChiTiet/Directors';
 import React from 'react';
 import { movieApi } from 'api-client/movieApi';
-import { Movie } from 'interfaces';
+import { Comment, ListParams, Movie } from 'interfaces';
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import WebView from 'react-native-webview';
 
 const Movies = () => {
 	const router = useRouter();
-	const { slug } = router.query;
+	const { slug, page, limit  } = router.query;
 	const [movie, setMovie] = React.useState<Movie>();
+	const [comments, setcomments] = React.useState<Comment[]>([]);
 	const [movieLoading, setMovieLoading] = React.useState(false);
+	const [isConfirmCancel, setIsConfirmCancel] = React.useState(false);
 
 	React.useEffect(() => {
 		if (slug) {
 			(async () => {
 				setMovieLoading(true);
 				try {
+					const params: ListParams = {
+						page: Number(`${page}`) || 1,
+						per_page: Number(`${limit}`) || 5,
+					};
+					const comment = await movieApi.getMovieByComments(slug,params);
 					const response: any = await movieApi.getById(slug);
+					console.log(comment.data);
 					setMovie(response as Movie);
+					setcomments(comment.data as Comment[]);
 				} catch (error) {
 					console.error('Failed to get movies playing: ', error);
 				}
@@ -31,6 +42,12 @@ const Movies = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	
+
+	const handleThanhToanClick = async () => {
+		
+	};
 	
 	return (
 		<section
@@ -48,7 +65,7 @@ const Movies = () => {
 							<Info movie={movie} />
 							<Row className="mt-4">
 								<Col lg={7}>
-									<Comment />
+									<Comments comments={comments} />
 								</Col>
 								<Col lg={5}>
 									<Card className="showtime-card movie-card">
@@ -60,6 +77,24 @@ const Movies = () => {
 								</Col>
 							</Row>
 							<RelatedMovies />
+							<Modal show={true}>
+								<Modal.Header >
+									<Modal.Title>Trailer</Modal.Title>
+								</Modal.Header>
+								<Modal.Body>
+									<video width='400' controls>
+										<source src="https://www.youtube.com/watch?v=EVWdzVtSh1I&ab_channel=CGVCinemasVietnam"/>
+									</video>
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="success">
+										Đóng
+									</Button>
+									<Button variant="outline-danger">
+										Hủy đơn hàng
+									</Button>
+								</Modal.Footer>
+							</Modal>
 						</Container>
 					</>
 				)
