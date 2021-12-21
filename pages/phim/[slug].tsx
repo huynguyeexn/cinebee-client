@@ -9,7 +9,6 @@ import { Directors } from 'components/ChiTiet/Directors';
 import React from 'react';
 import { movieApi } from 'api-client/movieApi';
 import { Comment, ListParams, Movie } from 'interfaces';
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import WebView from 'react-native-webview';
 
 const Movies = () => {
