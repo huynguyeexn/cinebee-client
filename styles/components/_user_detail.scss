@@ -115,3 +115,70 @@
 	}
 }
 /* End thông tin tài khoản */
+/* Lịch sử giao dịch*/
+.giao-dich{
+	&--image_movie{
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	&--content_movie {
+		p {
+			margin-bottom: 8px;
+			font-size: 17px;
+			width: 19%;
+		}
+		span {
+			font-size: 20px;
+			color: #a1a19f;
+		}
+	}
+	&--info {
+		.text_total{
+			color: #f9ed32;
+			font-size: 20px!important;
+		}
+		.w40 {
+			width: 40%;
+		}
+		.w-15 {width: 15%;}
+	}
+	&--table_giaodich {
+		.qr_code, .payment {
+			width: 16%;
+		}
+		.ngay {
+			width: 14%;
+		}
+		.movie{
+			width: 30%;
+			text-align: left!important;
+		}
+		.text_total{
+			color: #f9ed32;
+			font-size: 20px!important;
+		}
+	}
+}
+th{
+	background-color: #f9ed32;
+	color: black;
+}
+.table-dark th,.table-dark thead th{
+	border-color: #f9ed32;
+	text-align: center;
+}
+.table-dark td{    
+	font-weight: 400!important;
+    font-size: 17px;
+    border-color: #3b3b3b!important;
+	background-color: #3b3b3b;
+	text-align: center;
+}
+.table-dark td a{
+	color: #c9bf25!important;
+}
+tr {
+	border-top: 1.1px solid #595953;
+}

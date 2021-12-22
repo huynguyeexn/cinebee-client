@@ -17,5 +17,8 @@ export const orderApi = {
 	},
 	cancelOrder: (orderId: number): Promise<any> => {
 		return axiosClient.delete(`${endpoint}/${orderId}/delete`);
-	}
+	},
+    getOrderById: (id: number) => {
+        return axiosClient.get(endpoint + `/${id}`)
+    }
 };

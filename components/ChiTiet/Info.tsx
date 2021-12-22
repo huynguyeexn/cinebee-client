@@ -5,12 +5,18 @@ import { FaCalendarAlt, FaStar, FaClock } from 'react-icons/fa';
 import { Genre, Movie } from 'interfaces';
 import { movieApi } from 'api-client/movieApi';
 import { MOVIE_STATUS } from 'constant';
+import { useRouter } from 'next/router';
 
 interface Props {
 	movie: Movie;
+	onWatchTrailer: () => void;
 }
 
-export const Info = ({ movie }: Props) => {
+export const Info = ({ movie, onWatchTrailer }: Props) => {
+	const router = useRouter();
+	const handleChonLichChieu = async () => {
+		router.push(`/lich-chieu?movie=${movie.id}`);
+	};
 	return (
 		<Row>
 			{
@@ -49,10 +55,10 @@ export const Info = ({ movie }: Props) => {
 								</p>
 								<p className="mt-3">{movie?.description}</p>
 
-								<Button variant="primary" className=" mt-3">
+								<Button variant="primary" className=" mt-3" onClick={() => handleChonLichChieu()}>
 									Mua Vé
 								</Button>
-								<Button variant="primary" className=" ml-3 mt-3">
+								<Button variant="primary" className=" ml-3 mt-3" onClick={onWatchTrailer}>
 									Trailer
 								</Button>
 								<p className="d-flex align-items-center mt-3">

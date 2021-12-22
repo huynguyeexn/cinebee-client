@@ -1,4 +1,5 @@
 import { Movie } from 'interfaces';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Col, Row, Tab } from 'react-bootstrap';
 import { DateSelectCard, MovieSelectCard, TimeSelectCard } from '.';
@@ -11,6 +12,8 @@ export const TabTheoNgay = ({ tabKey }: Props) => {
 	const [movie, setMovie] = React.useState<Movie>();
 	const [date, setDate] = React.useState<string>();
 
+	const router = useRouter();
+	const movieId = router.query.movie as string;
 	const handleMovieSelect = (movie?: Movie) => {
 		if (!movie) {
 			setMovie(undefined);
@@ -32,7 +35,7 @@ export const TabTheoNgay = ({ tabKey }: Props) => {
 		<Tab.Pane eventKey={tabKey}>
 			<Row>
 				<Col lg={4}>
-					<MovieSelectCard firstLoading onMovieSelect={handleMovieSelect} />
+					<MovieSelectCard firstLoading onMovieSelect={handleMovieSelect} movieId={Number(movieId)} />
 				</Col>
 				<Col lg={4}>
 					<DateSelectCard movie={movie} onDateSelect={handleDateSelect} />

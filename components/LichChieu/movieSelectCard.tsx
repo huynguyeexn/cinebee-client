@@ -2,6 +2,7 @@ import { showtimesApi } from 'api-client/showtimeApi';
 import { AGE_RATING } from 'constant';
 import { Movie } from 'interfaces';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Badge, Card, ListGroup, Spinner } from 'react-bootstrap';
 import { minutesToHoursMinutes } from 'utils';
@@ -10,11 +11,13 @@ import { getAgeRatingBadgeColor } from 'utils/common';
 interface Props {
 	firstLoading?: boolean;
 	onMovieSelect: (movie?: Movie) => void;
+	movieId?: number;
 }
 
-export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
+export const MovieSelectCard = ({ firstLoading, onMovieSelect, movieId }: Props) => {
 	const [moviePlaying, setMoviePlaying] = React.useState([]);
 	const [movieLoading, setMovieLoading] = React.useState(false);
+	const router = useRouter();
 
 	React.useEffect(() => {
 		if (firstLoading) {
@@ -23,6 +26,18 @@ export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
 				try {
 					const response = await showtimesApi.getShowtimesMovies();
 					setMoviePlaying(response.data.map((item: any) => item.movie));
+					if (movieId) {
+						console.log(`movieId`, movieId);
+
+						response.data
+							.map((item: any) => item.movie)
+							.forEach((movie: Movie) => {
+								if (movie.id === movieId) {
+									onMovieSelect(movie);
+									setSelected(Number(movie.id));
+								}
+							});
+					}
 				} catch (error) {
 					console.error('Failed to get movies playing: ', error);
 				}
@@ -57,7 +72,9 @@ export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
 								<ListGroup.Item
 									key={movie.id}
 									onClick={() => handleSelect(movie)}
-									className={`list-group-item ${selected === movie.id ? 'selected' : ''}`}
+									className={`list-group-item ${
+										selected === movie.id || movie.id === movieId ? 'selected' : ''
+									}`}
 								>
 									<div className="movie-poster">
 										<Image
