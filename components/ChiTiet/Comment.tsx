@@ -1,15 +1,41 @@
 import React, { useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Form, Row } from 'react-bootstrap';
 import Image from 'next/image';
 import { FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa';
 import { Comment } from 'interfaces';
 import moment from 'moment';
+import { commentApi, CommentPayload } from 'api-client/commentApi';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
 interface Props {
 	comments: Comment[];
 }
 
+const formValidate = yup.object().shape({
+	content: yup.string().required(),
+});
+
 export const Comments = ({ comments }: Props) => {
+	const { handleSubmit } = useForm<any>({
+		resolver: yupResolver(formValidate),
+	});
+
+	const onSubmit = async(data: Comment) => {
+		console.log(data);
+		
+		const payload: CommentPayload = {
+			comment_at: '21/12/2021',
+			content: 'dvsdvd',
+			like: 10,
+			dislike: 10,
+			status: 1,
+			customer_id: 1,
+			movie_id: 1,
+		};
+		// const response = await commentApi.createComment(payload);
+	}
 
 	return (
 		<Card className="showtime-card movie-card">
@@ -45,14 +71,17 @@ export const Comments = ({ comments }: Props) => {
 						</Row>
 					))}
 					<Row className="movie-detail--comment mt-3">
-						<textarea
-							className="movie-detail--textarea"
-							id=""
-							cols={65}
-							rows={6}
-							placeholder="Bình luận..."
-						></textarea>
-						<button className="movie-detail--muave mt-3">Gửi</button>
+						<Form>
+							<textarea
+								className="movie-detail--textarea"
+								name="contents"
+								id=""
+								cols={65}
+								rows={6}
+								placeholder="Bình luận..."
+							></textarea>
+							<button className="movie-detail--muave mt-3" onClick={handleSubmit(onSubmit)}>Gửi</button>
+						</Form>
 					</Row>
 				</Card.Body>
 			</Card.Body>

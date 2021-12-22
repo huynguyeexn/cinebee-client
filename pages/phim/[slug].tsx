@@ -16,8 +16,7 @@ const Movies = () => {
 	const { slug, page, limit  } = router.query;
 	const [movie, setMovie] = React.useState<Movie>();
 	const [comments, setcomments] = React.useState<Comment[]>([]);
-	const [movieLoading, setMovieLoading] = React.useState(false);
-	const [isConfirmCancel, setIsConfirmCancel] = React.useState(false);
+	const [movieLoading, setMovieLoading] = React.useState(false);;
 
 	React.useEffect(() => {
 		if (slug) {
@@ -41,12 +40,6 @@ const Movies = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	
-
-	const handleThanhToanClick = async () => {
-		
-	};
 	
 	return (
 		<section
@@ -76,14 +69,11 @@ const Movies = () => {
 								</Col>
 							</Row>
 							<RelatedMovies />
-							<Modal show={true}>
+							{/* <Modal show={true}>
 								<Modal.Header >
 									<Modal.Title>Trailer</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-									<video width='400' controls>
-										<source src="https://www.youtube.com/watch?v=EVWdzVtSh1I&ab_channel=CGVCinemasVietnam"/>
-									</video>
 								</Modal.Body>
 								<Modal.Footer>
 									<Button variant="success">
@@ -93,7 +83,7 @@ const Movies = () => {
 										Hủy đơn hàng
 									</Button>
 								</Modal.Footer>
-							</Modal>
+							</Modal> */}
 						</Container>
 					</>
 				)

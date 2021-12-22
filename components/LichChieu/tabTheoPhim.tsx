@@ -42,7 +42,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 
 	const handleDatVeClick = () => {
 		if (movie && date && time) {
-			router.push(`/[showtime]/chon-ghe`, `/${time}/chon-ghe`);
+			router.push(`//chon-ghe`, `/${time}/chon-ghe`);
 		}
 	};
 

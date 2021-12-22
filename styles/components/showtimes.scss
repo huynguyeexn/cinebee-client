@@ -1,0 +1,40 @@
+.showtimes{
+    img {
+        width: 100%;
+    }
+    .card{
+        border-radius: 10px;
+        background-color: #1a191f;
+        min-height: 383px;
+    }
+    select {
+        width: 170px;
+        height: 45px;
+        border: 1px solid #ffee32;
+        background: #1a191f;
+        border-radius: 10px;
+        padding-left: 10px;
+        font-size: 18px;
+        color: white;
+        font-weight: 500;
+    }
+    .h5{
+        font-size: 28px;
+        color: white;
+    }
+    .time {
+        border: 2px solid #ffee32;
+        padding: 0px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        font-size: 18px;
+        height: 45px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex: 0 0 12%;
+
+    }
+}
