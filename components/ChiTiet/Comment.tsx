@@ -68,26 +68,25 @@ export const Comments = ({ movie, comments: commentsProps }: Props) => {
 											objectFit="cover"
 										></Image>
 									</Col>
-									<Col lg={11} sm={11} xs={10}>
+									<Col lg={9} sm={9} xs={6}>
 										<p className="mb-0">{comment?.customer.username}</p>
 										<span>
 											{moment(comment.comment_at).format('DD.MM.YYYY')},{' '}
 											{moment(comment.comment_at).format('HH:mm')}
 										</span>
 									</Col>
-									<Row className="movie-detail--comment1 mt-2">
-										<Card.Text className="movie-detail--comment1--border mb-0">
-											{comment.content}
-										</Card.Text>
-										<Card.Body className="pt-2 pb-2">
-											<p className="d-flex align-items-center mb-0">
-												<FaRegThumbsUp className="ml-2 mr-1 movie-detail--comment1--iconThumbsUp" />{' '}
-												{comment.like}{' '}
-												<FaRegThumbsDown className="ml-3 mr-1 movie-detail--comment1--iconThumbsDown" />{' '}
-												{comment.dislike}
-											</p>
-										</Card.Body>
-									</Row>
+									<Col lg={2} sm={2} xs={4}>
+										<p className="d-flex align-items-center mb-0">
+											<FaRegThumbsUp className="movie-detail--comment1--iconThumbsUp" />{' '}
+											{comment.like}
+											<div className="mx-2"></div>
+											<FaRegThumbsDown className="movie-detail--comment1--iconThumbsDown" />{' '}
+											{comment.dislike}
+										</p>
+									</Col>
+									<Col lg={12} sm={12} xs={12} className="movie-detail--comment1 ">
+										<Card.Body className="pt-2 pb-2 w-100">{comment.content}</Card.Body>
+									</Col>
 								</Row>
 							))}
 				</Card.Body>

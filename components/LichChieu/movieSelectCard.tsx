@@ -11,14 +11,14 @@ import { getAgeRatingBadgeColor } from 'utils/common';
 interface Props {
 	firstLoading?: boolean;
 	onMovieSelect: (movie?: Movie) => void;
+	movieId?: number;
 }
 
-export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
+export const MovieSelectCard = ({ firstLoading, onMovieSelect, movieId }: Props) => {
 	const [moviePlaying, setMoviePlaying] = React.useState([]);
 	const [movieLoading, setMovieLoading] = React.useState(false);
 	const router = useRouter();
-	const movieId = router.query.movie as string;
-	
+
 	React.useEffect(() => {
 		if (firstLoading) {
 			setMovieLoading(true);
@@ -26,13 +26,17 @@ export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
 				try {
 					const response = await showtimesApi.getShowtimesMovies();
 					setMoviePlaying(response.data.map((item: any) => item.movie));
-					if(movieId) {
-						response.data.map((item: any) => item.movie).forEach((movie: Movie) => {
-							if(movie.id === movieId) {
-								onMovieSelect(movie);
-								setSelected(Number(movie.id));
-							}
-						});
+					if (movieId) {
+						console.log(`movieId`, movieId);
+
+						response.data
+							.map((item: any) => item.movie)
+							.forEach((movie: Movie) => {
+								if (movie.id === movieId) {
+									onMovieSelect(movie);
+									setSelected(Number(movie.id));
+								}
+							});
 					}
 				} catch (error) {
 					console.error('Failed to get movies playing: ', error);
@@ -68,7 +72,9 @@ export const MovieSelectCard = ({ firstLoading, onMovieSelect }: Props) => {
 								<ListGroup.Item
 									key={movie.id}
 									onClick={() => handleSelect(movie)}
-									className={`list-group-item ${(selected === movie.id || movie.id === movieId) ? 'selected' : ''}`}
+									className={`list-group-item ${
+										selected === movie.id || movie.id === movieId ? 'selected' : ''
+									}`}
 								>
 									<div className="movie-poster">
 										<Image
