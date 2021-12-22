@@ -34,3 +34,36 @@
 		}
 	}
 }
+
+.payment-success {
+	&--header {
+		h1 {
+			width: 91%;
+		}
+		button {
+			height: 45px;
+			margin-top: 50px;
+			float: right;
+		}
+	}
+	&--qr {
+		width: 19%;
+		margin: 0 auto;
+		canvas {
+			padding: 10px;
+			background: #ffffff;
+		}
+	}
+	&--info {
+		.thongtin {
+			width: 40%;
+			font-size: 21px;
+			font-weight: normal;
+		}
+		span{
+			font-size: 24px;
+			font-weight: 500;
+			color: #ffee32;
+		}
+	}
+}

@@ -1,3 +1,4 @@
+import { movieApi } from 'api-client';
 import { Movie, Showtime } from 'interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -14,6 +15,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 	const [time, setTime] = React.useState<number>();
 
 	const router = useRouter();
+	const movieId = router.query.movie as string;
 
 	const handleMovieSelect = (movie?: Movie) => {
 		if (!movie) {
@@ -42,7 +44,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 
 	const handleDatVeClick = () => {
 		if (movie && date && time) {
-			router.push(`/[showtime]/chon-ghe`, `/${time}/chon-ghe`);
+			router.push(`//chon-ghe`, `/${time}/chon-ghe`);
 		}
 	};
 
@@ -50,7 +52,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 		<Tab.Pane eventKey={tabKey}>
 			<Row>
 				<Col lg={4}>
-					<MovieSelectCard firstLoading onMovieSelect={handleMovieSelect} />
+					<MovieSelectCard firstLoading onMovieSelect={handleMovieSelect} movieId={Number(movieId)}/>
 				</Col>
 				<Col lg={4}>
 					<DateSelectCard movie={movie} onDateSelect={handleDateSelect} />
