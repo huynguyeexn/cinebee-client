@@ -1,3 +1,4 @@
+import { movieApi } from 'api-client';
 import { Movie, Showtime } from 'interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -50,7 +51,7 @@ export const TabTheoPhim = ({ tabKey }: Props) => {
 		<Tab.Pane eventKey={tabKey}>
 			<Row>
 				<Col lg={4}>
-					<MovieSelectCard firstLoading onMovieSelect={handleMovieSelect} />
+					<MovieSelectCard firstLoading onMovieSelect={handleMovieSelect}/>
 				</Col>
 				<Col lg={4}>
 					<DateSelectCard movie={movie} onDateSelect={handleDateSelect} />

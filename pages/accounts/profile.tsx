@@ -18,8 +18,8 @@ interface Props {}
 const ProfilePage = (props: Props) => {
 	const { profile } = useAuth();
 	const router = useRouter();
-	const [order, setOrder] = useState<Order[]>([])
-	const [total, setTotal] = useState(0)
+	const [order, setOrder] = useState<Order[]>([]);
+	const [total, setTotal] = useState(0);
 	const [movieLoading, setMovieLoading] = React.useState(false);
 
 	if (typeof window !== 'undefined' && !profile) {
@@ -30,11 +30,10 @@ const ProfilePage = (props: Props) => {
 		(async () => {
 			setMovieLoading(true);
 			try {
-				const orders = await customerApi.getAllOrderById(profile.id);
-				setOrder(orders.data as Order[]);
-				for (let index = 0; index < order.length; index++) {
-					setTotal(total + order[index].showtime.room.price)
-				}
+				const response = await customerApi.getAllOrderById(profile.id);
+				const orders = response.data;;
+				setOrder(orders as Order[]);
+				setTotal(orders.reduce((total, order) => total + Number(order.total), 0));
 			} catch (error) {
 				console.error('Failed to get movies playing: ', error);
 			}
@@ -160,33 +159,42 @@ const ProfilePage = (props: Props) => {
 										</div>
 									</div>
 								</Tab.Pane>
-								<Tab.Pane eventKey="second" >
-									<h2 className='mt-3'>Lịch sử giao dịch</h2>
-									<Table striped bordered hover variant="dark" className='mt-4 giao-dich--table_giaodich'>
+								<Tab.Pane eventKey="second">
+									<h2 className="mt-3">Lịch sử giao dịch</h2>
+									<Table
+										striped
+										bordered
+										hover
+										variant="dark"
+										className="mt-4 giao-dich--table_giaodich"
+									>
 										<thead>
 											<tr>
-												<th className='ngay'>Ngày</th>
-												<th className='movie'>Phim</th>
 												<th>Mã vé</th>
-												<th>Giá trị</th>
-												<th className='qr_code'>QR code</th>
+												<th className="ngay">Ngày</th>
+												<th className="movie">Phim</th>
+												<th>Tổng tiền</th>
+												<th className="qr_code"></th>
 											</tr>
 										</thead>
 										<tbody>
-											{order && order.map((order,idx) => (
-												<tr key={idx}>
-													<td>{formatDateWithDay(order.booking_at)}</td>
-													<td className='movie'>{order.showtime.movie.name}</td>
-													<td>460388</td>
-													<td>{order.showtime.room.price}</td>
-													<td><Link href={`/accounts/${order.id}`}>Xem chi tiết</Link></td>
-												</tr>
-											))}
+											{order &&
+												order.map((order, idx) => (
+													<tr key={idx}>
+														<td>#{order.id}</td>
+														<td>{formatDateWithDay(order.booking_at)}</td>
+														<td className="movie">{order.showtime.movie.name}</td>
+														<td>{formatVND(order.showtime.room.price)}</td>
+														<td>
+															<Link href={`/accounts/${order.id}`}>Xem chi tiết</Link>
+														</td>
+													</tr>
+												))}
 											<tr>
-												<td className='text_total'>Tổng</td>
+												<td className="text_total">Tổng</td>
 												<td></td>
 												<td></td>
-												<td className='text_total'>{formatVND(total)}</td>
+												<td className="text_total">{formatVND(total)}</td>
 												<td></td>
 											</tr>
 										</tbody>

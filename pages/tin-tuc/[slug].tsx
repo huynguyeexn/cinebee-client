@@ -5,13 +5,8 @@ import { Blog } from 'interfaces/blog';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import React from 'react';
-import {
-    Card,
-    Col,
-    Container,
-    Image, Row,
-    Spinner
-} from 'react-bootstrap';
+import { Button, Card, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
+import Link from 'next/link';
 
 interface Props {}
 
@@ -21,7 +16,6 @@ const TinTucDetailPage = (props: Props) => {
 	const [blog, setBlog] = React.useState<Blog>();
 	const [movieLoading, setMovieLoading] = React.useState(false);
 	const [blogs, setBlogs] = React.useState<Blog[]>([]);
-
 	React.useEffect(() => {
 		if (slug) {
 			(async () => {
@@ -36,7 +30,7 @@ const TinTucDetailPage = (props: Props) => {
 			})();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [slug]);
 
 	React.useEffect(() => {
 		if (blog) {
@@ -52,10 +46,6 @@ const TinTucDetailPage = (props: Props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [blog]);
 
-	const handleBlogDetail = async (id: number) => {
-		router.push(`/tin-tuc/${id}`);
-	};
-
 	return (
 		<section
 			className={`movie-detail ${
@@ -66,8 +56,11 @@ const TinTucDetailPage = (props: Props) => {
 				<Spinner animation="border" variant="primary" />
 			) : (
 				<Container>
-					<Row className="tin-tuc-detail--content mt-5">
+					<Row className="tin-tuc-detail--content">
 						<Col lg={8} className="mt-5">
+							<Button variant="secondary" className="mb-3" onClick={() => router.back()}>
+								Quay về
+							</Button>
 							<Card>
 								<Card.Header>
 									<h2>{blog?.title}</h2>
@@ -99,8 +92,8 @@ const TinTucDetailPage = (props: Props) => {
 												</Col>
 												<Col lg={8} className="p-0 content">
 													<Card.Body>
-														<Card.Title onClick={() => handleBlogDetail(blog.id as number)}>
-															{blog.title}
+														<Card.Title>
+															<Link href={`/tin-tuc/${blog?.id}`}>{blog.title}</Link>
 														</Card.Title>
 														<div className="d-flex">
 															<p>

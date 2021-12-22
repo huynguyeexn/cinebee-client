@@ -5,7 +5,7 @@ import Image from 'next/image';
 interface Props {}
 
 export const BannerHeader = (props: Props) => {
-	const bannders = [
+	const banners = [
 		{
 			imageUrl: 'https://www.themoviedb.org/t/p/original/lBSrAja7uIULKE5Lscl9dtdWYGA.jpg',
 		},
@@ -37,8 +37,8 @@ export const BannerHeader = (props: Props) => {
 	return (
 		<div className="banner-header">
 			<Slider {...settings}>
-				{bannders &&
-					bannders.map((banner, idx) => (
+				{banners &&
+					banners.map((banner, idx) => (
 						<div className="" key={idx}>
 							<div className="banner-header-item">
 								<Image

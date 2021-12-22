@@ -45,3 +45,13 @@ export const removeSession = (key: string) => {
 export const clearSession = () => {
 	typeof window !== 'undefined' && window.sessionStorage.clear();
 }
+
+export const trailerLink = (link: string) => {
+	// get youtube id
+	const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+	const match = link.match(regExp);
+	if (match && match[2].length === 11) {
+		return `https://www.youtube.com/embed/${match[2]}`;
+	}
+	return '';
+}

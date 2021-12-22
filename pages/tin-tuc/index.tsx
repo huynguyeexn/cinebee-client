@@ -1,8 +1,8 @@
 import { blogApi } from 'api-client/blogApi';
 import { categoryApi } from 'api-client/categoryApi';
 import { useAuth } from 'hooks';
-import { Blog } from 'interfaces/blog';
 import { Category, ListParams, PaginationParams } from 'interfaces';
+import { Blog } from 'interfaces/blog';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -12,11 +12,11 @@ import {
 	Image,
 	ListGroup,
 	ListGroupItem,
-	Pagination,
 	Row,
 	Spinner,
 } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
+import Link from 'next/link';
 
 interface Props {}
 
@@ -26,7 +26,14 @@ const TinTucPage = (props: Props) => {
 	const [catLoading, setCatLoading] = React.useState(false);
 	const [categories, setCategories] = React.useState<Category[]>([]);
 	const [categorySelected, setCategorySelected] = React.useState<number>(0);
-	const [pagination, setPagination] = React.useState<PaginationParams>({});
+	const [pagination, setPagination] = React.useState<PaginationParams>({
+		total: 10,
+		last_page: 1,
+		page: 1,
+		per_page: 10,
+		sort_by: '',
+		sort_type: 'desc',
+	});
 	const router = useRouter();
 	const { page, limit } = router.query;
 	const { profile } = useAuth();
@@ -66,9 +73,6 @@ const TinTucPage = (props: Props) => {
 	}, []);
 
 	const handleBlogDetail = async (id: number) => {
-		// if (!profile) {
-		// 	return router.push('/dang-nhap');
-		// }
 		router.push(`/tin-tuc/${id}`);
 	};
 
@@ -115,8 +119,8 @@ const TinTucPage = (props: Props) => {
 	return (
 		<section className={`movie-detail`}>
 			<Container>
-				<Row className="w-100 d-flex justify-content-center align-items-center">
-					<h2 className="text-center tin-tuc--title mt-5">TIN TỨC</h2>
+				<Row className="w-100 d-flex justify-content-center align-items-center my-2">
+					<h2 className="text-center tin-tuc--title">TIN TỨC</h2>
 				</Row>
 				<Row>
 					<Col lg={9}>
@@ -144,8 +148,8 @@ const TinTucPage = (props: Props) => {
 													</Col>
 													<Col lg={8} className="p-0 content">
 														<Card.Body>
-															<Card.Title className="cursor-pointer" onClick={() => handleBlogDetail(blog.id as number)}>
-																{blog.title}
+															<Card.Title>
+																<Link href={`/tin-tuc/${blog?.id}`}>{blog.title}</Link>
 															</Card.Title>
 															<Card.Text>{blog.summary.slice(0, 130)}</Card.Text>
 															<div className="footer">
